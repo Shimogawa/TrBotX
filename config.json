@@ -1,0 +1,15 @@
+{
+  "commandConfig": {
+    "commandPrefix": [
+      "bot -"
+    ],
+    "voteForJinyan": {
+      "name": "jy",
+      "alias": []
+    }
+  },
+  "voteForJinyanConfig": {
+    "voteWords": "投票禁言：",
+    "time": 300
+  }
+}
