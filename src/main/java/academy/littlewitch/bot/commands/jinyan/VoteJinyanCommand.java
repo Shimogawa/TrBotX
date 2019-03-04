@@ -19,19 +19,21 @@ public class VoteJinyanCommand implements GroupCommand {
                                ArrayList<String> arrayList) {
         long qq;
         if (arrayList.size() != 1) {
-            return Configuration.config.globalCommandConfig.voteJinyanCommand.alt[0];
+            return Configuration.config.voteForJinyanConfig.voteFormatIncorrectWords;
         }
         try {
             qq = Long.parseLong(arrayList.get(0));
         } catch (NumberFormatException e) {
-            return Configuration.config.globalCommandConfig.voteJinyanCommand.alt[0];
+            return Configuration.config.voteForJinyanConfig.voteFormatIncorrectWords;
         }
         StartVoteJinyanCommand.checkList(eventGroupMessage);
         if (!StartVoteJinyanCommand.waitBanList.containsKey(qq))
             return "查无此人";
 
         VoteStatus status = StartVoteJinyanCommand.waitBanList.get(qq);
-        status.addOneVote();
+        if (!status.addVote(groupUser.id)) {
+            return Configuration.config.voteForJinyanConfig.alreadyVotedWords;
+        }
         if (status.getVotes() >= Configuration.config.voteForJinyanConfig.votesToGetBanned) {
             StartVoteJinyanCommand.waitBanList.remove(qq);
             GeneralUtilCommands.commandBan(eventGroupMessage, group.id, qq,

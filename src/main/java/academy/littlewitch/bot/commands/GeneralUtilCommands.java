@@ -3,8 +3,6 @@ package academy.littlewitch.bot.commands;
 import cc.moecraft.icq.event.events.message.EventGroupMessage;
 import cc.moecraft.icq.sender.HttpApiBase;
 
-import java.util.HashMap;
-
 public class GeneralUtilCommands {
 
     public static void commandBan(EventGroupMessage event,

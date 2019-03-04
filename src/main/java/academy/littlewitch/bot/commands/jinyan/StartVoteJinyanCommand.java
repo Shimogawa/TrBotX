@@ -10,8 +10,6 @@ import cc.moecraft.icq.user.GroupUser;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
-import java.util.Iterator;
-import java.util.Map;
 
 public class StartVoteJinyanCommand implements GroupCommand {
 
@@ -24,7 +22,7 @@ public class StartVoteJinyanCommand implements GroupCommand {
                                String command,
                                ArrayList<String> args) {
         if (args.size() != 1)
-            return Configuration.config.globalCommandConfig.startVoteJinyanCommand.alt[1];
+            return Configuration.config.globalCommandConfig.malformedErrorMessage;
         String ater = args.get(0);
         if (!ater.startsWith("[CQ:at,qq="))
             return "查无此人";
@@ -38,13 +36,13 @@ public class StartVoteJinyanCommand implements GroupCommand {
         }
 
         if (!waitBanList.containsKey(banner)) {
-            return Configuration.config.globalCommandConfig.startVoteJinyanCommand.alt[0];
+            return Configuration.config.voteForJinyanConfig.voteAlreadyStartedWords;
         }
 
         String info = String.format(Configuration.config.voteForJinyanConfig.voteWords,
                 new ComponentAt(sender.id), args.get(0));
 
-        waitBanList.put(banner, new VoteStatus(event.time));
+        waitBanList.put(banner, new VoteStatus(event.time, sender.id));
         return info;
     }
 

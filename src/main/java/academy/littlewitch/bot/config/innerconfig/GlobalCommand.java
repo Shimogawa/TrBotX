@@ -7,17 +7,8 @@ public class GlobalCommand {
 
     public String helpDocument;
 
-    public String[] alt;
-
-    public GlobalCommand(CommandProperties commandProperties, String helpDocument, String... alt) {
-        this.commandProperties = commandProperties;
-        this.helpDocument = helpDocument;
-        this.alt = alt;
-    }
-
     public GlobalCommand(CommandProperties commandProperties, String helpDocument) {
         this.commandProperties = commandProperties;
         this.helpDocument = helpDocument;
-        this.alt = new String[0];
     }
 }

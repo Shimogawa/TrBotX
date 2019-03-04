@@ -1,7 +1,8 @@
 package academy.littlewitch.bot.config;
 
 import academy.littlewitch.bot.config.innerconfig.GlobalCommandConfig;
-import academy.littlewitch.bot.config.innerconfig.voteForJinyan;
+import academy.littlewitch.bot.config.innerconfig.VersionCommandConfig;
+import academy.littlewitch.bot.config.innerconfig.VoteForJinyanConfig;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -16,7 +17,8 @@ public class Configuration {
     public static final String CONFIG_FILE = "config.json";
 
     public GlobalCommandConfig globalCommandConfig = new GlobalCommandConfig();
-    public voteForJinyan voteForJinyanConfig = new voteForJinyan();
+    public VoteForJinyanConfig voteForJinyanConfig = new VoteForJinyanConfig();
+    public VersionCommandConfig versionCommandConfig = new VersionCommandConfig();
 
     public static void getConfig() {
         System.out.println("[Info]: Reading config...");
