@@ -1,7 +1,7 @@
 package academy.littlewitch.bot.config;
 
-import academy.littlewitch.bot.config.innerconfig.CommandConfig;
-import academy.littlewitch.bot.config.innerconfig.VoteForJinyan;
+import academy.littlewitch.bot.config.innerconfig.GlobalCommandConfig;
+import academy.littlewitch.bot.config.innerconfig.voteForJinyan;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -15,8 +15,8 @@ public class Configuration {
 
     public static final String CONFIG_FILE = "config.json";
 
-    public CommandConfig commandConfig = new CommandConfig();
-    public VoteForJinyan voteForJinyanConfig = new VoteForJinyan();
+    public GlobalCommandConfig globalCommandConfig = new GlobalCommandConfig();
+    public voteForJinyan voteForJinyanConfig = new voteForJinyan();
 
     public static void getConfig() {
         System.out.println("[Info]: Reading config...");
@@ -45,7 +45,7 @@ public class Configuration {
             Gson g = new GsonBuilder().setPrettyPrinting().create();
             String s = g.toJson(config);
             try (BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(
-                    new FileOutputStream(file), "UTF-8"))) {
+                    new FileOutputStream(file), StandardCharsets.UTF_8))) {
                 bw.write(s);
             }
         } catch (IOException e) {

@@ -12,16 +12,16 @@ public class TrBotX {
         start();
     }
 
-    static void setConfiguration() {
+    private static void setConfiguration() {
         Configuration.getConfig();
     }
 
-    static void start() {
+    private static void start() {
         PicqBotX bot = new PicqBotX("127.0.0.1", 31091, 31092, false);
         try {
             bot.getEventManager()
                     .registerListener(new TestListener());
-            bot.enableCommandManager(Configuration.config.commandConfig.commandPrefix);
+            bot.enableCommandManager(Configuration.config.globalCommandConfig.commandPrefix);
 
             bot.startBot();
         } catch (HttpServerStartFailedException | IllegalAccessException | InstantiationException e) {
@@ -29,7 +29,7 @@ public class TrBotX {
         }
     }
 
-    static void onShutdown() {
+    private static void onShutdown() {
         Configuration.saveConfig();
     }
 }

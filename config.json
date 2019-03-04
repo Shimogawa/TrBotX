@@ -1,15 +1,36 @@
 {
-  "commandConfig": {
+  "globalCommandConfig": {
     "commandPrefix": [
       "bot -"
     ],
-    "voteForJinyan": {
-      "name": "jy",
-      "alias": []
+    "startVoteJinyanCommand": {
+      "commandProperties": {
+        "name": "jy",
+        "alias": []
+      },
+      "helpDocument": "禁言",
+      "alt": [
+        "已经开始对于该用户的投票。若需要投票，请使用投票指令。",
+        "指令格式不正确"
+      ]
+    },
+    "voteJinyanCommand": {
+      "commandProperties": {
+        "name": "vote",
+        "alias": []
+      },
+      "helpDocument": "投票禁言",
+      "alt": [
+        "投票禁言请使用qq号"
+      ]
     }
   },
   "voteForJinyanConfig": {
-    "voteWords": "投票禁言：",
-    "time": 300
+    "voteWords": "%1$s 发起了对于 %2$s 投票禁言。",
+    "bannedWords": "%1$s 满 %2$s 票，已被禁言 %3$s 分钟。",
+    "getVoteWords": "%1$s 现在有 %2$s 票",
+    "validTime": 300,
+    "jinyanTime": 600,
+    "votesToGetBanned": 10
   }
 }
