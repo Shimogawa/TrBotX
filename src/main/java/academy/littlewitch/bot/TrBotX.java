@@ -4,6 +4,7 @@ import academy.littlewitch.bot.config.Configuration;
 import academy.littlewitch.bot.listeners.TestListener;
 import cc.moecraft.icq.PicqBotX;
 import cc.moecraft.icq.exceptions.HttpServerStartFailedException;
+import cc.moecraft.logger.environments.ColorSupportLevel;
 
 public class TrBotX {
     public static void main(String[] args) {
@@ -17,10 +18,12 @@ public class TrBotX {
     }
 
     private static void start() {
-        PicqBotX bot = new PicqBotX("127.0.0.1", 31091, 31092, false);
+        PicqBotX bot = new PicqBotX("127.0.0.1", 31091, 31092,
+                false, ColorSupportLevel.OS_DEPENDENT, "logs", "PicqBotX-Log");
+        bot.setHttpApiVersionDetection(".*");
         try {
-            bot.getEventManager()
-                    .registerListener(new TestListener());
+//            bot.getEventManager()
+//                    .registerListener(new TestListener());
             bot.enableCommandManager(Configuration.config.globalCommandConfig.commandPrefix);
 
             bot.startBot();

@@ -13,6 +13,14 @@ public class VoteForJinyanConfig {
 
     public String alreadyVotedWords = "你已经投过票了";
 
+    public String notAtToVoteWords = "请使用at开启对那个人的投票";
+
+    public String removedVotingWords = "已移除你发起的所有投票";
+
+    public String noSuchGuyWords = "查无此人";
+
+    public String checkBanningListCommand = "c";
+
     public int validTime = 300;
 
     public int jinyanTime = 600;

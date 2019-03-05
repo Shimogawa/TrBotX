@@ -8,13 +8,16 @@ public class VoteStatus {
 
     private int votes;
 
+    private long initiator;
+
     private HashSet<Long> votedUsers;
 
-    public VoteStatus(long voteStartTime, long initializer) {
+    public VoteStatus(long voteStartTime, long initiator) {
         this.voteStartTime = voteStartTime;
         votes = 1;
         votedUsers = new HashSet<>();
-        votedUsers.add(initializer);
+        votedUsers.add(initiator);
+        this.initiator = initiator;
     }
 
     public long getVoteStartTime() {
@@ -23,6 +26,10 @@ public class VoteStatus {
 
     public int getVotes() {
         return votes;
+    }
+
+    public long getInitiator() {
+        return initiator;
     }
 
     public HashSet<Long> getVotedUsers() {

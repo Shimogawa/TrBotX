@@ -17,10 +17,12 @@ public class VoteJinyanCommand implements GroupCommand {
                                GroupUser groupUser,
                                Group group, String s,
                                ArrayList<String> arrayList) {
-        long qq;
+        if (!Configuration.config.globalCommandConfig.voteJinyanCommand.enabled)
+            return null;
         if (arrayList.size() != 1) {
             return Configuration.config.voteForJinyanConfig.voteFormatIncorrectWords;
         }
+        long qq;
         try {
             qq = Long.parseLong(arrayList.get(0));
         } catch (NumberFormatException e) {
@@ -28,7 +30,7 @@ public class VoteJinyanCommand implements GroupCommand {
         }
         StartVoteJinyanCommand.checkList(eventGroupMessage);
         if (!StartVoteJinyanCommand.waitBanList.containsKey(qq))
-            return "查无此人";
+            return Configuration.config.voteForJinyanConfig.noSuchGuyWords;
 
         VoteStatus status = StartVoteJinyanCommand.waitBanList.get(qq);
         if (!status.addVote(groupUser.id)) {

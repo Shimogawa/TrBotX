@@ -20,4 +20,9 @@ public class GlobalCommandConfig {
             new CommandProperties("v"),
             "查看版本"
     );
+
+    public GlobalCommand helpCommand = new GlobalCommand(
+            new CommandProperties("h", "help"),
+            "查看帮助"
+    );
 }

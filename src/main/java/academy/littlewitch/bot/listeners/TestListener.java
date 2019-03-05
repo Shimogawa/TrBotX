@@ -10,7 +10,7 @@ public class TestListener extends IcqListener {
 
     @EventHandler
     public void repeat(EventGroupMessage msg) {
-        if (msg.groupId != 165462193)
+        if (msg.groupId != 610531770)
             return;
         System.out.println("Received: " + msg.rawMessage + " " + msg.time);
         System.out.println(msg.getGroupUser(msg.senderId).getInfo());
@@ -20,9 +20,9 @@ public class TestListener extends IcqListener {
 //        msg.respond(msg.rawMessage + "，，，");
     }
 
-    @EventHandler
-    public void privateRepeat(EventPrivateMessage msg) {
-        System.out.println("Received from " + msg.getSender().getInfo().getNickname() + ": " + msg.rawMessage);
-        msg.respond(msg.rawMessage + "，，，");
-    }
+//    @EventHandler
+//    public void privateRepeat(EventPrivateMessage msg) {
+//        System.out.println("Received from " + msg.getSender().getInfo().getNickname() + ": " + msg.rawMessage);
+//        msg.respond(msg.rawMessage + "，，，");
+//    }
 }
