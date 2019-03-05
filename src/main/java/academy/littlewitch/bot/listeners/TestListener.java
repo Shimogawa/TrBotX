@@ -14,9 +14,9 @@ public class TestListener extends IcqListener {
             return;
         System.out.println("Received: " + msg.rawMessage + " " + msg.time);
         System.out.println(msg.getGroupUser(msg.senderId).getInfo());
-//        if (msg.time - lastTimeFudu < 5000)
+//        if (msg.validTime - lastTimeFudu < 5000)
 //            return;
-//        lastTimeFudu = msg.time;
+//        lastTimeFudu = msg.validTime;
 //        msg.respond(msg.rawMessage + "，，，");
     }
 
