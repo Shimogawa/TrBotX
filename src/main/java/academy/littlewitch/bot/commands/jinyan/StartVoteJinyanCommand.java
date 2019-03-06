@@ -41,7 +41,7 @@ public class StartVoteJinyanCommand implements GroupCommand {
             return Configuration.config.voteForJinyanConfig.removedVotingWords;
         }
         long banner;
-        if (!ater.startsWith("[CQ:at,qq="))
+        if (!ater.startsWith("[cq:at,qq="))
         {
             try {
                 banner = Long.parseLong(ater);
@@ -59,7 +59,6 @@ public class StartVoteJinyanCommand implements GroupCommand {
         }
 
         if (waitBanList.containsKey(banner)) {
-            System.out.println(waitBanList.get(banner).getVoteStartTime());
             return Configuration.config.voteForJinyanConfig.voteAlreadyStartedWords;
         }
 

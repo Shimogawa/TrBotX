@@ -121,5 +121,6 @@ buildNumber.properties
 # MYSELF
 
 config.json
+logs/
 
 # End of https://www.gitignore.io/api/java,maven,intellij

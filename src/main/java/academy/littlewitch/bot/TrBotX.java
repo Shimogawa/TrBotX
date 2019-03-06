@@ -2,6 +2,7 @@ package academy.littlewitch.bot;
 
 import academy.littlewitch.bot.config.Configuration;
 import academy.littlewitch.bot.listeners.TestListener;
+import academy.littlewitch.bot.listeners.qungui.ShuapinControlListener;
 import cc.moecraft.icq.PicqBotX;
 import cc.moecraft.icq.exceptions.HttpServerStartFailedException;
 import cc.moecraft.logger.environments.ColorSupportLevel;
@@ -32,8 +33,9 @@ public class TrBotX {
                 false, ColorSupportLevel.OS_DEPENDENT, "logs", "PicqBotX-Log");
         bot.setHttpApiVersionDetection(".*");
         try {
-//            bot.getEventManager()
-//                    .registerListener(new TestListener());
+            bot.getEventManager()
+                    .registerListener(new TestListener())
+                    .registerListener(new ShuapinControlListener());
             bot.enableCommandManager(Configuration.config.globalCommandConfig.commandPrefix);
 
             bot.startBot();

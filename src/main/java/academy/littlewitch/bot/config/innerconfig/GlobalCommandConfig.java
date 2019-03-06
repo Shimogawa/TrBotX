@@ -34,6 +34,7 @@ public class GlobalCommandConfig {
 
     public GlobalCommand calculatorCommand = new GlobalCommand(
             new CommandProperties("calc"),
-            "计算器"
+            "计算器",
+            false
     );
 }

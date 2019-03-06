@@ -3,6 +3,7 @@ package academy.littlewitch.bot.config;
 import academy.littlewitch.bot.config.innerconfig.GlobalCommandConfig;
 import academy.littlewitch.bot.config.innerconfig.VersionCommandConfig;
 import academy.littlewitch.bot.config.innerconfig.VoteForJinyanConfig;
+import academy.littlewitch.bot.config.innerconfig.monitorconfig.MonitorConfig;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -19,6 +20,7 @@ public class Configuration {
     public GlobalCommandConfig globalCommandConfig = new GlobalCommandConfig();
     public VoteForJinyanConfig voteForJinyanConfig = new VoteForJinyanConfig();
     public VersionCommandConfig versionCommandConfig = new VersionCommandConfig();
+    public MonitorConfig monitorConfig = new MonitorConfig();
 
     public static void getConfig() {
         System.out.println("[Info]: Reading config...");

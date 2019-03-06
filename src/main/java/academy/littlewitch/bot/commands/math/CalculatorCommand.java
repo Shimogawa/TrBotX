@@ -18,15 +18,14 @@ public class CalculatorCommand implements EverywhereCommand {
     public ScriptEngineManager mgr;
     public ScriptEngine jsEngine;
 
-    public CalculatorCommand() {
-        mgr = new ScriptEngineManager();
-        jsEngine = mgr.getEngineByName("JavaScript");
-    }
-
     @Override
     public String run(EventMessage eventMessage, User user, String s, ArrayList<String> arrayList) {
         if (!Configuration.config.globalCommandConfig.calculatorCommand.enabled) {
             return null;
+        }
+        if (mgr == null) {
+            mgr = new ScriptEngineManager();
+            jsEngine = mgr.getEngineByName("JavaScript");
         }
         if (arrayList.size() == 0)
             return null;
