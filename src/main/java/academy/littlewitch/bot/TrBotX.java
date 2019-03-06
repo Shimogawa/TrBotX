@@ -8,6 +8,8 @@ import cc.moecraft.icq.exceptions.HttpServerStartFailedException;
 import cc.moecraft.logger.environments.ColorSupportLevel;
 
 public class TrBotX {
+    public static final String version = "v0.3.3";
+
     public static void main(String[] args) {
         if (args.length == 1) {
             Configuration.getConfig();

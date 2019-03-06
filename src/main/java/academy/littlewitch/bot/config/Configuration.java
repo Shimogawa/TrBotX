@@ -6,6 +6,7 @@ import academy.littlewitch.bot.config.innerconfig.VoteForJinyanConfig;
 import academy.littlewitch.bot.config.innerconfig.monitorconfig.MonitorConfig;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.annotations.SerializedName;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -17,9 +18,16 @@ public class Configuration {
 
     public static final String CONFIG_FILE = "config.json";
 
+    @SerializedName("全局指令设定")
     public GlobalCommandConfig globalCommandConfig = new GlobalCommandConfig();
+
+    @SerializedName("投票设定")
     public VoteForJinyanConfig voteForJinyanConfig = new VoteForJinyanConfig();
+
+    @SerializedName("版本设定")
     public VersionCommandConfig versionCommandConfig = new VersionCommandConfig();
+
+    @SerializedName("群管理设定")
     public MonitorConfig monitorConfig = new MonitorConfig();
 
     public static void getConfig() {
@@ -36,8 +44,11 @@ public class Configuration {
                     Files.readAllBytes(Paths.get(CONFIG_FILE)), StandardCharsets.UTF_8);
             Gson g = new GsonBuilder().setPrettyPrinting().create();
             config = g.fromJson(json, Configuration.class);
-        } catch (IOException e) {
+        } catch (Exception e) {
             System.out.println("[Error]: " + e.getMessage());
+            System.out.println("Saving new settings...");
+            config = new Configuration();
+            saveConfig();
         }
     }
 

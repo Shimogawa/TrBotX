@@ -1,5 +1,6 @@
 package academy.littlewitch.bot.commands.version;
 
+import academy.littlewitch.bot.TrBotX;
 import academy.littlewitch.bot.config.Configuration;
 import cc.moecraft.icq.command.CommandProperties;
 import cc.moecraft.icq.command.interfaces.EverywhereCommand;
@@ -12,7 +13,7 @@ public class VersionCommand implements EverywhereCommand {
 
     @Override
     public String run(EventMessage eventMessage, User user, String s, ArrayList<String> arrayList) {
-        return Configuration.config.versionCommandConfig.version;
+        return String.format(Configuration.config.versionCommandConfig.version, TrBotX.version);
     }
 
     @Override
