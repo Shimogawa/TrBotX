@@ -15,6 +15,12 @@ public class GlobalCommand {
         this.helpDocument = helpDocument;
     }
 
+    public GlobalCommand(CommandProperties commandProperties, String helpDocument, boolean enabled) {
+        this.enabled = enabled;
+        this.commandProperties = commandProperties;
+        this.helpDocument = helpDocument;
+    }
+
     @Override
     public String toString() {
         return commandProperties.name + " -- " + helpDocument;

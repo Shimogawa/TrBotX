@@ -25,4 +25,15 @@ public class GlobalCommandConfig {
             new CommandProperties("h", "help"),
             "查看帮助"
     );
+
+    public GlobalCommand mathCommand = new GlobalCommand(
+            new CommandProperties("math"),
+            "数学公式",
+            false
+    );
+
+    public GlobalCommand calculatorCommand = new GlobalCommand(
+            new CommandProperties("calc"),
+            "计算器"
+    );
 }

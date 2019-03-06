@@ -8,13 +8,23 @@ import cc.moecraft.logger.environments.ColorSupportLevel;
 
 public class TrBotX {
     public static void main(String[] args) {
+        if (args.length == 1) {
+            Configuration.getConfig();
+            Configuration.saveConfig();
+            return;
+        }
         setConfiguration();
+        prepreparation();
         Runtime.getRuntime().addShutdownHook(new Thread(TrBotX::onShutdown));
         start();
     }
 
     private static void setConfiguration() {
         Configuration.getConfig();
+    }
+
+    private static void prepreparation() {
+        Configuration.saveConfig();
     }
 
     private static void start() {
@@ -33,6 +43,6 @@ public class TrBotX {
     }
 
     private static void onShutdown() {
-        Configuration.saveConfig();
+//        Configuration.saveConfig();
     }
 }

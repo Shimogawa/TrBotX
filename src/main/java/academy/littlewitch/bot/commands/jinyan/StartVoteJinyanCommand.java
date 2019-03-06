@@ -28,22 +28,34 @@ public class StartVoteJinyanCommand implements GroupCommand {
             return null;
         checkList(event);
         if (args.size() < 1) {
-            if (!removeFromList(sender.id))
-                return Configuration.config.globalCommandConfig.malformedErrorMessage;
-            return Configuration.config.voteForJinyanConfig.removedVotingWords;
+            return Configuration.config.globalCommandConfig.malformedErrorMessage;
         }
-        String ater = args.get(0);
-        if (ater.toLowerCase().equals(Configuration.config.voteForJinyanConfig.checkBanningListCommand)) {
+        String ater = args.get(0).toLowerCase();
+        if (ater.equals(Configuration.config.voteForJinyanConfig.checkBanningListCommand)) {
             return getWaitingBanners();
         }
-        if (!ater.startsWith("[CQ:at,qq="))
-            return Configuration.config.voteForJinyanConfig.notAtToVoteWords;
-        ater = ater.substring(10, ater.length() - 1);
+        if (ater.equals(Configuration.config.voteForJinyanConfig.cancelVotingsCommand)) {
+            if (!removeFromList(sender.id)) {
+                return Configuration.config.voteForJinyanConfig.didNotInitiatedAnyVoteWords;
+            }
+            return Configuration.config.voteForJinyanConfig.removedVotingWords;
+        }
         long banner;
-        try {
-            banner = Long.parseLong(ater);
-        } catch (NumberFormatException e) {
-            return null;
+        if (!ater.startsWith("[CQ:at,qq="))
+        {
+            try {
+                banner = Long.parseLong(ater);
+            } catch (NumberFormatException e) {
+                return Configuration.config.voteForJinyanConfig.notValidStartVoteWords;
+            }
+
+        } else {
+            ater = ater.substring(10, ater.length() - 1);
+            try {
+                banner = Long.parseLong(ater);
+            } catch (NumberFormatException e) {
+                return null;
+            }
         }
 
         if (waitBanList.containsKey(banner)) {
@@ -52,8 +64,7 @@ public class StartVoteJinyanCommand implements GroupCommand {
         }
 
         String info = String.format(Locale.CHINA, Configuration.config.voteForJinyanConfig.voteWords,
-                new ComponentAt(sender.id).toString(), args.get(0));
-
+                new ComponentAt(sender.id).toString(), new ComponentAt(banner));
 
         waitBanList.put(banner, new VoteStatus(event.time, sender.id));
         return info;
@@ -76,12 +87,14 @@ public class StartVoteJinyanCommand implements GroupCommand {
     }
 
     public static String getWaitingBanners() {
+        if (waitBanList.isEmpty()) return null;
         StringBuilder sb = new StringBuilder();
-        sb.append("查询禁言投票名单：\nQQ号 - 票数\n");
+        sb.append("查询禁言投票名单：\n");
+        sb.append(String.format(Configuration.config.voteForJinyanConfig.waitingBanListFormat, "QQ号", "票数"));
         for (Map.Entry<Long, VoteStatus> entry : waitBanList.entrySet()) {
-            sb.append(entry.getKey());
-            sb.append(" - ");
-            sb.append(entry.getValue().getVotes());
+            String f = String.format(Configuration.config.voteForJinyanConfig.waitingBanListFormat,
+                    entry.getKey(), entry.getValue().getVotes());
+            sb.append(f);
             sb.append('\n');
         }
         sb.deleteCharAt(sb.length() - 1);

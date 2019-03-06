@@ -51,7 +51,9 @@ public class Configuration {
                 bw.write(s);
             }
         } catch (IOException e) {
-            System.out.println("[Error]: " + e.toString());
+            System.out.println("[Error]: " + e.getMessage());
+        } catch (Exception ex) {
+            System.out.println("[Error]: " + ex.getMessage());
         }
     }
 }
