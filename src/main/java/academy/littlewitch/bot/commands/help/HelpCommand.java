@@ -14,18 +14,19 @@ import java.util.ArrayList;
 public class HelpCommand implements EverywhereCommand {
     @Override
     public String run(EventMessage eventMessage, User user, String s, ArrayList<String> arrayList) {
-        MessageBuilder mb = new MessageBuilder();
+        StringBuilder sb = new StringBuilder();
         try {
             for (Field f : Configuration.config.globalCommandConfig.getClass().getDeclaredFields()) {
                 if (f.getType() == GlobalCommand.class) {
-                    mb.add(f.get(Configuration.config.globalCommandConfig))
-                      .newLine();
+                    sb.append(f.get(Configuration.config.globalCommandConfig));
+                    sb.append('\n');
                 }
             }
         } catch (IllegalAccessException e) {
-            return "error... contact me.";
+            return null;
         }
-        return mb.toString();
+        sb.deleteCharAt(sb.length() - 1);
+        return sb.toString();
     }
 
     @Override
