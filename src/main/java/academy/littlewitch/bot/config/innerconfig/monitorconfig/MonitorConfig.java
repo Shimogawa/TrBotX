@@ -18,8 +18,8 @@ public class MonitorConfig {
     @SerializedName("禁言时长")
     public int jinyanTime = 600;
 
-//    @SerializedName("最大单人重复发言次数")
-//    public int maxRepeatNumber = 4;
+    @SerializedName("最大单人重复发言次数")
+    public int maxRepeatNumber = 3;
 
     @SerializedName("第几个复读开始禁言")
     public int minRepeatToBeBanned = 4;
