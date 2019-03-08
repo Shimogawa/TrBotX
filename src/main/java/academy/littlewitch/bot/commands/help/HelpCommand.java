@@ -5,7 +5,6 @@ import academy.littlewitch.bot.config.innerconfig.GlobalCommand;
 import cc.moecraft.icq.command.CommandProperties;
 import cc.moecraft.icq.command.interfaces.EverywhereCommand;
 import cc.moecraft.icq.event.events.message.EventMessage;
-import cc.moecraft.icq.sender.message.MessageBuilder;
 import cc.moecraft.icq.user.User;
 
 import java.lang.reflect.Field;
@@ -14,6 +13,8 @@ import java.util.ArrayList;
 public class HelpCommand implements EverywhereCommand {
     @Override
     public String run(EventMessage eventMessage, User user, String s, ArrayList<String> arrayList) {
+        if (!Configuration.config.globalCommandConfig.helpCommand.enabled)
+            return null;
         StringBuilder sb = new StringBuilder();
         try {
             for (Field f : Configuration.config.globalCommandConfig.getClass().getDeclaredFields()) {

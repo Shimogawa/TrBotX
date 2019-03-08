@@ -34,12 +34,12 @@ public class StartVoteJinyanCommand implements GroupCommand {
         String ater = args.get(0).toLowerCase();
 
         // Check banning list
-        if (ater.equals(Configuration.config.voteForJinyanConfig.checkBanningListCommand)) {
+        if (ater.equals(Configuration.config.voteForJinyanConfig.checkBanningListCommand.toLowerCase())) {
             return getWaitingBanners();
         }
 
         // Cancel voting
-        if (ater.equals(Configuration.config.voteForJinyanConfig.cancelVotingsCommand)) {
+        if (ater.equals(Configuration.config.voteForJinyanConfig.cancelVotingsCommand.toLowerCase())) {
             if (!removeFromList(sender.id)) {
                 return Configuration.config.voteForJinyanConfig.didNotInitiatedAnyVoteWords;
             }
@@ -64,7 +64,6 @@ public class StartVoteJinyanCommand implements GroupCommand {
             }
         }
 
-        // TODO: here check how to check banner exists.
         if (event.getGroupUser(banner).getInfo() == null || banner == event.getBotAccount().getId())
             return Configuration.config.voteForJinyanConfig.noSuchGuyWords;
 
