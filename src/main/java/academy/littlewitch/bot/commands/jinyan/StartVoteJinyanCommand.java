@@ -1,5 +1,6 @@
 package academy.littlewitch.bot.commands.jinyan;
 
+import academy.littlewitch.bot.commands.GeneralUtilCommands;
 import academy.littlewitch.bot.config.Configuration;
 import cc.moecraft.icq.command.CommandProperties;
 import cc.moecraft.icq.command.interfaces.GroupCommand;
@@ -31,15 +32,20 @@ public class StartVoteJinyanCommand implements GroupCommand {
             return Configuration.config.globalCommandConfig.malformedErrorMessage;
         }
         String ater = args.get(0).toLowerCase();
+
+        // Check banning list
         if (ater.equals(Configuration.config.voteForJinyanConfig.checkBanningListCommand)) {
             return getWaitingBanners();
         }
+
+        // Cancel voting
         if (ater.equals(Configuration.config.voteForJinyanConfig.cancelVotingsCommand)) {
             if (!removeFromList(sender.id)) {
                 return Configuration.config.voteForJinyanConfig.didNotInitiatedAnyVoteWords;
             }
             return Configuration.config.voteForJinyanConfig.removedVotingWords;
         }
+
         long banner;
         if (!ater.startsWith("[cq:at,qq="))
         {
@@ -58,10 +64,33 @@ public class StartVoteJinyanCommand implements GroupCommand {
             }
         }
 
+        // TODO: here check how to check banner exists.
+        if (event.getGroupUser(banner).getInfo() == null || banner == event.getBotAccount().getId())
+            return Configuration.config.voteForJinyanConfig.noSuchGuyWords;
+
+        // Vote for that guy
         if (waitBanList.containsKey(banner)) {
-            return Configuration.config.voteForJinyanConfig.voteAlreadyStartedWords;
+            checkList(event);
+
+            VoteStatus status = waitBanList.get(banner);
+            if (!status.addVote(event.senderId)) {
+                return Configuration.config.voteForJinyanConfig.alreadyVotedWords;
+            }
+            if (status.getVotes() >= Configuration.config.voteForJinyanConfig.votesToGetBanned) {
+                waitBanList.remove(banner);
+                GeneralUtilCommands.commandBan(event, group.id, banner,
+                        Configuration.config.voteForJinyanConfig.jinyanTime);
+                return String.format(Configuration.config.voteForJinyanConfig.bannedWords,
+                        new ComponentAt(banner),
+                        Configuration.config.voteForJinyanConfig.votesToGetBanned,
+                        Configuration.config.voteForJinyanConfig.jinyanTime / 60);
+            }
+            return String.format(Configuration.config.voteForJinyanConfig.getVoteWords,
+                    banner, status.getVotes(),
+                    (Configuration.config.voteForJinyanConfig.validTime - (event.time - status.getVoteStartTime())) / 60);
         }
 
+        // Start the vote
         String info = String.format(Locale.CHINA, Configuration.config.voteForJinyanConfig.voteWords,
                 new ComponentAt(sender.id).toString(), new ComponentAt(banner));
 

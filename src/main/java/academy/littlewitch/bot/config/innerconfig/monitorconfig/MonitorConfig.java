@@ -19,7 +19,10 @@ public class MonitorConfig {
     public int jinyanTime = 600;
 
     @SerializedName("最大单人重复发言次数")
-    public int maxRepeatNumber = 3;
+    public int maxSingleRepeatNumber = 3;
+
+    @SerializedName("单人重复发言判断时间")
+    public int checkSingleRepeatCycle = 60;
 
     @SerializedName("第几个复读开始禁言")
     public int minRepeatToBeBanned = 4;

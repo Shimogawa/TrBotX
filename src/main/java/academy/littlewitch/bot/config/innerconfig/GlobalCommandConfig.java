@@ -10,16 +10,16 @@ public class GlobalCommandConfig {
     @SerializedName("指令格式不正确提示")
     public String malformedErrorMessage = "指令格式不正确";
 
-    @SerializedName("开始禁言指令设定")
+    @SerializedName("投票禁言指令设定")
     public GlobalCommand startVoteJinyanCommand = new GlobalCommand(
-            new CommandProperties("jy"), "禁言"
+            new CommandProperties("jy"), "投票禁言"
     );
 
-    @SerializedName("投票禁言指令设定")
-    public GlobalCommand voteJinyanCommand = new GlobalCommand(
-            new CommandProperties("vote"),
-            "投票禁言"
-    );
+//    @SerializedName("投票禁言指令设定")
+//    public GlobalCommand voteJinyanCommand = new GlobalCommand(
+//            new CommandProperties("vote"),
+//            "投票禁言"
+//    );
 
     @SerializedName("版本指令设定")
     public GlobalCommand versionCommand = new GlobalCommand(

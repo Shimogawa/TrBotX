@@ -10,13 +10,13 @@ public class VoteForJinyanConfig {
     public String bannedWords = "%1$s 满 %2$s 票，已被禁言 %3$s 分钟。";
 
     @SerializedName("目前得票消息")
-    public String getVoteWords = "%1$s 现在有 %2$s 票";
+    public String getVoteWords = "%1$s 现在有 %2$s 票，剩余投票时间 %3$s 分钟。";
 
-    @SerializedName("已开始投票消息")
-    public String voteAlreadyStartedWords = "之前已经开始了对于该用户的投票。若需要投票，请使用投票指令。";
-
-    @SerializedName("投票格式错误消息")
-    public String voteFormatIncorrectWords = "投票禁言请使用qq号";
+//    @SerializedName("已开始投票消息")
+//    public String voteAlreadyStartedWords = "之前已经开始了对于该用户的投票。若需要投票，请使用投票指令。";
+//
+//    @SerializedName("投票格式错误消息")
+//    public String voteFormatIncorrectWords = "投票禁言请使用qq号";
 
     @SerializedName("已投票消息")
     public String alreadyVotedWords = "你已经投过票了";

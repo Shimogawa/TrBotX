@@ -30,6 +30,8 @@ public class Configuration {
     @SerializedName("群管理设定")
     public MonitorConfig monitorConfig = new MonitorConfig();
 
+    public boolean debugMode = true;
+
     public static void getConfig() {
         System.out.println("[Info]: Reading config...");
         try {

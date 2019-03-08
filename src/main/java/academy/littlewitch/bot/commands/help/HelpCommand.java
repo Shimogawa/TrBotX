@@ -18,6 +18,9 @@ public class HelpCommand implements EverywhereCommand {
         try {
             for (Field f : Configuration.config.globalCommandConfig.getClass().getDeclaredFields()) {
                 if (f.getType() == GlobalCommand.class) {
+                    GlobalCommand gc = (GlobalCommand)f.get(Configuration.config.globalCommandConfig);
+                    if (!gc.enabled)
+                        continue;
                     sb.append(f.get(Configuration.config.globalCommandConfig));
                     sb.append('\n');
                 }

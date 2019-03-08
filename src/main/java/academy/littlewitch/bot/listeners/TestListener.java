@@ -11,7 +11,7 @@ public class TestListener extends IcqListener {
     public void repeat(EventGroupMessage msg) {
         if (msg.groupId != 610531770)
             return;
-        System.out.println("Received raw: " + msg.rawMessage + " " + msg.time);
+        System.out.println(msg.rawMessage + " " + msg.time);
         System.out.println(msg.getGroupUser(msg.senderId).getInfo());
     }
 }
