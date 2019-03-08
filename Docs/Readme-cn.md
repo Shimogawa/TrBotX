@@ -5,7 +5,7 @@
 鸣谢：
 
 - [PicqBotX](https://github.com/HyDevelop/PicqBotX)
-- [coolq-http-api](https://github.com/richardchien/coolq-http-api
+- [coolq-http-api](https://github.com/richardchien/coolq-http-api)
 
 ## 仅用于
 

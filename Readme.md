@@ -7,7 +7,7 @@
 Thanks:
 
 - [PicqBotX](https://github.com/HyDevelop/PicqBotX)
-- [coolq-http-api](https://github.com/richardchien/coolq-http-api
+- [coolq-http-api](https://github.com/richardchien/coolq-http-api)
 
 ## Used ONLY for
 
