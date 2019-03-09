@@ -2,6 +2,7 @@ package academy.littlewitch.bot.commands.jinyan;
 
 import academy.littlewitch.bot.commands.GeneralUtilCommands;
 import academy.littlewitch.bot.config.Configuration;
+import academy.littlewitch.bot.utils.Pair;
 import cc.moecraft.icq.command.CommandProperties;
 import cc.moecraft.icq.command.interfaces.GroupCommand;
 import cc.moecraft.icq.event.events.message.EventGroupMessage;
@@ -18,6 +19,8 @@ import java.util.Map;
 public class StartVoteJinyanCommand implements GroupCommand {
 
     public static Hashtable<Long, VoteStatus> waitBanList = new Hashtable<>();
+
+    public static Hashtable<Long, Pair<Integer, Long>> usageList = new Hashtable<>();
 
     @Override
     public String groupMessage(EventGroupMessage event,
@@ -46,6 +49,13 @@ public class StartVoteJinyanCommand implements GroupCommand {
             return Configuration.config.voteForJinyanConfig.removedVotingWords;
         }
 
+        // Check used times and cooldown
+        if (checkUsageTimes(event)) {
+            return String.format(Configuration.config.voteForJinyanConfig.exceedUsageLimitWords,
+                    Configuration.config.voteForJinyanConfig.cooldown / 3600,
+                    Configuration.config.voteForJinyanConfig.maxUseLimit);
+        }
+
         long banner;
         if (!ater.startsWith("[cq:at,qq="))
         {
@@ -64,7 +74,8 @@ public class StartVoteJinyanCommand implements GroupCommand {
             }
         }
 
-        if (event.getGroupUser(banner).getInfo() == null || banner == event.getBotAccount().getId())
+        GroupUser gu = event.getGroupUser(banner);
+        if (gu.getInfo() == null || gu.isAdmin())
             return Configuration.config.voteForJinyanConfig.noSuchGuyWords;
 
         // Vote for that guy
@@ -126,5 +137,28 @@ public class StartVoteJinyanCommand implements GroupCommand {
         }
         sb.deleteCharAt(sb.length() - 1);
         return sb.toString();
+    }
+
+    /**
+     *
+     * @param egm
+     * @return true if can continue to use, false otherwise.
+     */
+    public static boolean checkUsageTimes(EventGroupMessage egm) {
+        if (usageList.containsKey(egm.senderId)) {
+            Pair<Integer, Long> p = usageList.get(egm.senderId);
+            p.elem1++;
+            if (p.elem1 > Configuration.config.voteForJinyanConfig.maxUseLimit) {
+                if (egm.time - p.elem2 > Configuration.config.voteForJinyanConfig.cooldown) {
+                    p.elem2 = egm.time;
+                    p.elem1 = 1;
+                    return true;
+                }
+                return false;
+            }
+            return true;
+        }
+        usageList.put(egm.senderId, new Pair<>(1, egm.time));
+        return true;
     }
 }

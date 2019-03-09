@@ -37,8 +37,9 @@ public class TrBotX {
         bot.setHttpApiVersionDetection(".*");
         bot.setMultiAccountOptimizations(false);
         try {
+            if (Configuration.config.debugMode)
+                bot.getEventManager().registerListener(new TestListener());
             bot.getEventManager()
-                    .registerListener(new TestListener())
                     .registerListener(new ShuapinControlListener())
                     .registerListener(new RepeatControlListener());
             bot.enableCommandManager(Configuration.config.globalCommandConfig.commandPrefix);

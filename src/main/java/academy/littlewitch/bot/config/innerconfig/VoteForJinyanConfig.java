@@ -3,6 +3,15 @@ package academy.littlewitch.bot.config.innerconfig;
 import com.google.gson.annotations.SerializedName;
 
 public class VoteForJinyanConfig {
+    @SerializedName("指令使用冷却")
+    public int cooldown = 3600;
+
+    @SerializedName("指令冷却后最大使用")
+    public int maxUseLimit = 2;
+
+    @SerializedName("滥用指令消息")
+    public String exceedUsageLimitWords = "严禁滥用禁言指令。%1$s小时内只能使用%2$s次";
+
     @SerializedName("发起投票消息")
     public String voteWords = "%1$s 发起了对于 %2$s 投票禁言。";
 

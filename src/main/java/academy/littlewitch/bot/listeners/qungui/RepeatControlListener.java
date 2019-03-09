@@ -52,7 +52,6 @@ public class RepeatControlListener extends IcqListener {
             GeneralUtilCommands.commandBan(egm,
                     egm.groupId, egm.senderId, Configuration.config.monitorConfig.jinyanTime);
             egm.respond(Configuration.config.monitorConfig.warningWords);
-            System.out.println("2222222");
         }
     }
 
@@ -81,7 +80,6 @@ public class RepeatControlListener extends IcqListener {
             GeneralUtilCommands.commandBan(egm,
                     egm.groupId, egm.senderId, Configuration.config.monitorConfig.jinyanTime);
             egm.respond(Configuration.config.monitorConfig.warningWords);
-            System.out.println("1111111");
         }
     }
 }
