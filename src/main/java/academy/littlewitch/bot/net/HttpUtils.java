@@ -33,7 +33,7 @@ public class HttpUtils {
         return null;
     }
 
-    public static ResponseInfo sendPostHttp(String url, KeyValuePair<String, String>[] params) {
+    public static ResponseInfo sendPostHttp(String url, KeyValuePair<String, String> ...params) {
         URL urlObj = formURL(url);
 
         try {
