@@ -29,7 +29,7 @@ public class HireInfo {
                     int playerNumber,
                     String mods,
                     String playTime) {
-        this.remainingSending = 2;
+        this.remainingSending = Configuration.config.hireConfig.totalSendTime;
         this.eventPrivateMessage = epm;
         this.startTime = startTime;
         this.isValid = true;

@@ -26,4 +26,7 @@ public class HireMPCommandConfig {
 
     @SerializedName("发起成功消息")
     public String succeed = "发起成功";
+
+    @SerializedName("人数格式错误消息")
+    public String numberFormatErrorMsg = "人数请使用数字";
 }

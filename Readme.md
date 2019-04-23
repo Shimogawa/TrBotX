@@ -1,4 +1,4 @@
-# TrBotX
+# TrBotX 0.4.0
 
 [简体中文](Docs/Readme-cn.md)
 

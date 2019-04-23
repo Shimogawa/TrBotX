@@ -26,7 +26,7 @@ public class HireMultiplayerCommand implements PrivateCommand {
         }
         if (!canHire(eventPrivateMessage)) {
             return String.format(Configuration.config.hireConfig.exceedUsageLimitWords,
-                    Configuration.config.hireConfig.sendInterval / 3600);
+                    Configuration.config.hireConfig.timelimit / 3600);
         }
 
         ArrayList<String> cmds = Util.splitAllWhitespace(arrayList);
@@ -49,7 +49,7 @@ public class HireMultiplayerCommand implements PrivateCommand {
         } catch (IndexOutOfBoundsException e) {
             return Configuration.config.globalCommandConfig.malformedErrorMessage;
         } catch (NumberFormatException e2) {
-            return "人数请使用数字";
+            return Configuration.config.hireConfig.numberFormatErrorMsg;
         }
         return Configuration.config.hireConfig.succeed;
     }

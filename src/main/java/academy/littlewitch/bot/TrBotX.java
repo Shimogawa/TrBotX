@@ -16,7 +16,7 @@ import cc.moecraft.icq.PicqBotX;
 import cc.moecraft.icq.PicqConfig;
 
 public class TrBotX {
-    public static final String version = "v0.3.3";
+    public static final String version = "v0.4.0";
 
     private static PicqConfig botConfig;
 
@@ -40,6 +40,8 @@ public class TrBotX {
         Configuration.saveConfig();
         botConfig = new PicqConfig(31092);
         botConfig.setMultiAccountOptimizations(false);
+        botConfig.setApiAsync(true);
+        botConfig.setCommandArgsSplitRegex("\\s");
     }
 
     private static void start() {
@@ -66,6 +68,7 @@ public class TrBotX {
                         new RepeatControlListener()
                 );
         bot.enableCommandManager(Configuration.config.globalCommandConfig.commandPrefix);
+        bot.getCommandManager();
         bot.getCommandManager()
                 .registerCommands(
                         new HelpCommand(),
