@@ -26,6 +26,18 @@ public class HelpCommand implements EverywhereCommand {
                     sb.append('\n');
                 }
             }
+            if (Configuration.config.superManagers.contains(user.getId())) {
+                sb.append("-----超管指令-----");
+                for (Field f : Configuration.config.superCommandConfig.getClass().getDeclaredFields()) {
+                    if (f.getType() == GlobalCommand.class) {
+                        GlobalCommand gc = (GlobalCommand)f.get(Configuration.config.superCommandConfig);
+                        if (!gc.enabled)
+                            continue;
+                        sb.append(f.get(Configuration.config.superCommandConfig));
+                        sb.append('\n');
+                    }
+                }
+            }
         } catch (IllegalAccessException e) {
             return null;
         }

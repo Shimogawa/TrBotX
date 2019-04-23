@@ -17,8 +17,11 @@ public class ShuapinControlListener extends IcqListener {
             return;
         }
 
+        if (egm.isAdmin())
+            return;
+
         if (egm.rawMessage.length() <= Configuration.config.monitorConfig.maxLength &&
-            StringUtils.countMatches(egm.rawMessage, "\n") <= Configuration.config.monitorConfig.maxLines) {
+                StringUtils.countMatches(egm.rawMessage, "\n") <= Configuration.config.monitorConfig.maxLines) {
             return;
         }
         egm.ban(Configuration.config.monitorConfig.jinyanTime);
@@ -33,6 +36,9 @@ public class ShuapinControlListener extends IcqListener {
         if (Configuration.config.debugMode && egm.groupId != 610531770) {
             return;
         }
+
+        if (egm.isAdmin())
+            return;
 
         if (!RepeatControlListener.personalRecords.containsKey(egm.groupId)) {
             RepeatControlListener.personalRecords.put(egm.groupId, new Hashtable<>());
@@ -51,7 +57,6 @@ public class ShuapinControlListener extends IcqListener {
             GeneralUtilCommands.commandBan(egm,
                     egm.groupId, egm.senderId, Configuration.config.monitorConfig.jinyanTime);
             egm.respond(Configuration.config.monitorConfig.warningWords);
-            System.out.println("3333333");
         }
     }
 }

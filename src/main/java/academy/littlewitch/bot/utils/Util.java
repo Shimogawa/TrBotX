@@ -1,5 +1,8 @@
 package academy.littlewitch.bot.utils;
 
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Util {
@@ -12,5 +15,28 @@ public class Util {
                 .replace("[", "&#91;")
                 .replace("]", "&#93;")
                 .replace(",", "&#44;");
+    }
+
+    public static ArrayList<String> splitAllWhitespace(ArrayList<String> args) {
+        ArrayList<String> copy = new ArrayList<>();
+        for (String s : args) {
+            String[] ss = s.split("\\s");
+            for (String p : ss) {
+                if (StringUtils.isNotBlank(p)) {
+                    copy.add(p);
+                }
+            }
+        }
+        return copy;
+    }
+
+    public static ArrayList<String> splitByWhitespace(String arg) {
+        ArrayList<String> copy = new ArrayList<>();
+        for (String s : arg.split("\\s")) {
+            if (StringUtils.isNotBlank(s)) {
+                copy.add(s);
+            }
+        }
+        return copy;
     }
 }

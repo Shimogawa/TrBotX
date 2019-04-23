@@ -43,14 +43,14 @@ public class StartVoteJinyanCommand implements GroupCommand {
 
         // Cancel voting
         if (ater.equals(Configuration.config.voteForJinyanConfig.cancelVotingsCommand.toLowerCase())) {
-            if (!removeFromList(sender.id)) {
+            if (!removeFromList(sender.getId())) {
                 return Configuration.config.voteForJinyanConfig.didNotInitiatedAnyVoteWords;
             }
             return Configuration.config.voteForJinyanConfig.removedVotingWords;
         }
 
         // Check used times and cooldown
-        if (checkUsageTimes(event)) {
+        if (!checkUsageTimes(event)) {
             return String.format(Configuration.config.voteForJinyanConfig.exceedUsageLimitWords,
                     Configuration.config.voteForJinyanConfig.cooldown / 3600,
                     Configuration.config.voteForJinyanConfig.maxUseLimit);
@@ -88,7 +88,7 @@ public class StartVoteJinyanCommand implements GroupCommand {
             }
             if (status.getVotes() >= Configuration.config.voteForJinyanConfig.votesToGetBanned) {
                 waitBanList.remove(banner);
-                GeneralUtilCommands.commandBan(event, group.id, banner,
+                GeneralUtilCommands.commandBan(event, group.getId(), banner,
                         Configuration.config.voteForJinyanConfig.jinyanTime);
                 return String.format(Configuration.config.voteForJinyanConfig.bannedWords,
                         new ComponentAt(banner),
@@ -102,9 +102,9 @@ public class StartVoteJinyanCommand implements GroupCommand {
 
         // Start the vote
         String info = String.format(Locale.CHINA, Configuration.config.voteForJinyanConfig.voteWords,
-                new ComponentAt(sender.id).toString(), new ComponentAt(banner));
+                new ComponentAt(sender.getId()).toString(), new ComponentAt(banner));
 
-        waitBanList.put(banner, new VoteStatus(event.time, sender.id));
+        waitBanList.put(banner, new VoteStatus(event.time, sender.getId()));
         return info;
     }
 

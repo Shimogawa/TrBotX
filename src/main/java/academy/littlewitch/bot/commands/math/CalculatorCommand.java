@@ -34,8 +34,7 @@ public class CalculatorCommand implements EverywhereCommand {
         try {
             return jsEngine.eval(m).toString();
         } catch (ScriptException e) {
-            System.out.println(e.getMessage());
-            return null;
+            return e.getMessage();
         }
     }
 

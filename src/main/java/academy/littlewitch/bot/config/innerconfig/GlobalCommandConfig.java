@@ -15,10 +15,22 @@ public class GlobalCommandConfig {
             new CommandProperties("jy"), "投票禁言"
     );
 
+    @SerializedName("招募联机指令设定")
+    public GlobalCommand hireMultiCommand = new GlobalCommand(
+            new CommandProperties("hire"),
+            "招募联机",
+            true
+    );
+
 //    @SerializedName("投票禁言指令设定")
 //    public GlobalCommand voteJinyanCommand = new GlobalCommand(
 //            new CommandProperties("vote"),
 //            "投票禁言"
+//    );
+
+//    @SerializedName("加群验证指令设定")
+//    public GlobalCommand authCommand = new GlobalCommand(
+//            new CommandProperties("auth"), "加群验证"
 //    );
 
     @SerializedName("版本指令设定")

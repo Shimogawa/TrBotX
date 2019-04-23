@@ -14,9 +14,7 @@ public class GlobalCommand {
     public String helpDocument;
 
     public GlobalCommand(CommandProperties commandProperties, String helpDocument) {
-        this.enabled = true;
-        this.commandProperties = commandProperties;
-        this.helpDocument = helpDocument;
+        this(commandProperties, helpDocument, true);
     }
 
     public GlobalCommand(CommandProperties commandProperties, String helpDocument, boolean enabled) {

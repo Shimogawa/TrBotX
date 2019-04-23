@@ -1,9 +1,12 @@
 package academy.littlewitch.bot.config;
 
 import academy.littlewitch.bot.config.innerconfig.GlobalCommandConfig;
+import academy.littlewitch.bot.config.innerconfig.HireMPCommandConfig;
 import academy.littlewitch.bot.config.innerconfig.VersionCommandConfig;
 import academy.littlewitch.bot.config.innerconfig.VoteForJinyanConfig;
+import academy.littlewitch.bot.config.innerconfig.monitorconfig.AuthConfig;
 import academy.littlewitch.bot.config.innerconfig.monitorconfig.MonitorConfig;
+import academy.littlewitch.bot.config.innerconfig.monitorconfig.SuperCommandConfig;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.annotations.SerializedName;
@@ -12,11 +15,18 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.HashSet;
 
 public class Configuration {
     public static Configuration config;
 
     public static final String CONFIG_FILE = "config.json";
+
+    @SerializedName("超级管理员")
+    public HashSet<Long> superManagers = new HashSet<>();
+
+    @SerializedName("泰拉群组号")
+    public HashSet<Long> trGroups = new HashSet<>();
 
     @SerializedName("全局指令设定")
     public GlobalCommandConfig globalCommandConfig = new GlobalCommandConfig();
@@ -30,7 +40,16 @@ public class Configuration {
     @SerializedName("群管理设定")
     public MonitorConfig monitorConfig = new MonitorConfig();
 
-    public boolean debugMode = true;
+    @SerializedName("发起联机设定")
+    public HireMPCommandConfig hireConfig = new HireMPCommandConfig();
+
+//    @SerializedName("加群验证设定")
+//    public AuthConfig authConfig = new AuthConfig();
+
+    @SerializedName("超级指令设定")
+    public SuperCommandConfig superCommandConfig = new SuperCommandConfig();
+
+    public boolean debugMode = false;
 
     public static void getConfig() {
         System.out.println("[Info]: Reading config...");
@@ -48,9 +67,10 @@ public class Configuration {
             config = g.fromJson(json, Configuration.class);
         } catch (Exception e) {
             System.out.println("[Error]: " + e.getMessage());
-            System.out.println("Saving new settings...");
-            config = new Configuration();
-            saveConfig();
+//            System.out.println("Saving new settings...");
+//            config = new Configuration();
+//            saveConfig();
+            System.exit(-1);
         }
     }
 

@@ -31,9 +31,9 @@ public class Auth {
 
     /**
      * Gives the game hours of the specific user with specific game
-     * @param userId
+     * @param userId the user's id, NOT SteamID64.
      * @param gameId
-     * @return game minutes if has the game, -1 with all other situations.
+     * @return game hours if has the game, -1 with all other situations.
      */
     public static int getGameHours(String userId, String gameId) {
         ResponseInfo response = HttpUtils.sendGetHttp(String.format(
@@ -54,7 +54,7 @@ public class Auth {
                                   .getAsJsonObject()
                                   .get("playtime_forever")
                                   .getAsInt();
-        return playtime;
+        return playtime / 60;
     }
 
     public static int getGameHoursTerraria(String userId) {
