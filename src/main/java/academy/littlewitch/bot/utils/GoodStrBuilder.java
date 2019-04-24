@@ -32,6 +32,20 @@ public class GoodStrBuilder implements CharSequence {
         return this;
     }
 
+    public GoodStrBuilder append(String... s) {
+        for (int i = 0; i < s.length; i++) {
+            sb.append(s[i]);
+        }
+        return this;
+    }
+
+    public GoodStrBuilder append(Object... o) {
+        for (int i = 0; i < o.length; i++) {
+            sb.append(o[i]);
+        }
+        return this;
+    }
+
     public GoodStrBuilder newLine() {
         sb.append('\n');
         return this;

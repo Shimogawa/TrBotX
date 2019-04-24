@@ -12,7 +12,13 @@ public class ChangeConfigCommand implements PrivateCommand {
 
     @Override
     public String privateMessage(EventPrivateMessage eventPrivateMessage, User user, String s, ArrayList<String> arrayList) {
-        return "功能暂未完成。";
+        if (!Configuration.config.superCommandConfig.changeConfigCommand.enabled) {
+            return null;
+        }
+        if (!Configuration.config.superManagers.contains(user.getId())) {
+            return null;
+        }
+        return null;
     }
 
     @Override

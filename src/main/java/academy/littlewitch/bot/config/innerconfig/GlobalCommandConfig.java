@@ -22,6 +22,13 @@ public class GlobalCommandConfig {
             true
     );
 
+    @SerializedName("天气查询指令设定")
+    public GlobalCommand weatherInfoCommand = new GlobalCommand(
+            new CommandProperties("weather"),
+            "天气查询",
+            true
+    );
+
 //    @SerializedName("投票禁言指令设定")
 //    public GlobalCommand voteJinyanCommand = new GlobalCommand(
 //            new CommandProperties("vote"),

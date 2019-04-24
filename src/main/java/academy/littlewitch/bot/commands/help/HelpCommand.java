@@ -27,7 +27,7 @@ public class HelpCommand implements EverywhereCommand {
                 }
             }
             if (Configuration.config.superManagers.contains(user.getId())) {
-                sb.append("-----超管指令-----");
+                sb.append("-----超管指令-----\n");
                 for (Field f : Configuration.config.superCommandConfig.getClass().getDeclaredFields()) {
                     if (f.getType() == GlobalCommand.class) {
                         GlobalCommand gc = (GlobalCommand)f.get(Configuration.config.superCommandConfig);

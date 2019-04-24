@@ -4,11 +4,11 @@ import academy.littlewitch.bot.config.innerconfig.GlobalCommandConfig;
 import academy.littlewitch.bot.config.innerconfig.HireMPCommandConfig;
 import academy.littlewitch.bot.config.innerconfig.VersionCommandConfig;
 import academy.littlewitch.bot.config.innerconfig.VoteForJinyanConfig;
-import academy.littlewitch.bot.config.innerconfig.monitorconfig.AuthConfig;
 import academy.littlewitch.bot.config.innerconfig.monitorconfig.MonitorConfig;
 import academy.littlewitch.bot.config.innerconfig.monitorconfig.SuperCommandConfig;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonSyntaxException;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.*;
@@ -51,27 +51,39 @@ public class Configuration {
 
     public boolean debugMode = false;
 
-    public static void getConfig() {
+    private Configuration() {}
+
+    public static void getConfig() throws JsonSyntaxException {
         System.out.println("[Info]: Reading config...");
         try {
-            File file = new File(CONFIG_FILE);
-            if (!file.exists()) {
-                file.createNewFile();
-                config = new Configuration();
-                saveConfig();
+            if (newConfig())
                 return;
-            }
             String json = new String(
                     Files.readAllBytes(Paths.get(CONFIG_FILE)), StandardCharsets.UTF_8);
             Gson g = new GsonBuilder().setPrettyPrinting().create();
             config = g.fromJson(json, Configuration.class);
-        } catch (Exception e) {
+        } catch (IOException e) {
             System.out.println("[Error]: " + e.getMessage());
 //            System.out.println("Saving new settings...");
 //            config = new Configuration();
 //            saveConfig();
             System.exit(-1);
         }
+    }
+
+    public static boolean newConfig() {
+        File file = new File(CONFIG_FILE);
+        if (file.exists())
+            return false;
+        try {
+            file.createNewFile();
+            config = new Configuration();
+            saveConfig();
+        } catch (IOException e) {
+            System.out.println("[Error]: " + e.getMessage());
+            System.exit(-1);
+        }
+        return true;
     }
 
     public static void saveConfig() {

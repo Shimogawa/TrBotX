@@ -17,4 +17,9 @@ public class ResponseInfo {
     public String getResponseText() {
         return responseText;
     }
+
+    @Override
+    public String toString() {
+        return responseText;
+    }
 }

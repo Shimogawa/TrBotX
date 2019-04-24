@@ -105,7 +105,7 @@ public class HttpUtils {
     private static ResponseInfo getRespFromCon(HttpURLConnection connection) throws IOException {
         int responseCode = connection.getResponseCode();
         try (BufferedReader br = new BufferedReader(
-                new InputStreamReader(connection.getInputStream()))) {
+                new InputStreamReader(connection.getInputStream(), StandardCharsets.UTF_8))) {
             String line;
             StringBuffer sb = new StringBuffer();
             while ((line = br.readLine()) != null) {
