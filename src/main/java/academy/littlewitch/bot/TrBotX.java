@@ -15,13 +15,13 @@ import academy.littlewitch.bot.test.TestCommand;
 import academy.littlewitch.bot.test.TestListener;
 import academy.littlewitch.bot.listeners.qungui.RepeatControlListener;
 import academy.littlewitch.bot.listeners.qungui.ShuapinControlListener;
-import academy.littlewitch.bot.utils.GoodStrBuilder;
+import academy.littlewitch.utils.GoodStrBuilder;
 import cc.moecraft.icq.PicqBotX;
 import cc.moecraft.icq.PicqConfig;
 import com.google.gson.JsonSyntaxException;
 
 public class TrBotX {
-    public static final String version = "v0.4.5";
+    public static final String version = "v0.4.6";
 
     private static PicqConfig botConfig;
 
@@ -62,9 +62,6 @@ public class TrBotX {
             } catch (JsonSyntaxException e) {
                 System.out.print("There is syntax error: ");
                 System.out.println(e.getMessage());
-//                String s = e.getLocalizedMessage();
-//                String[] a = s.substring(s.indexOf("line")).split(" ");
-//                System.out.println("Line " + a[1] + " column " + a[3]);
             }
             return true;
         }

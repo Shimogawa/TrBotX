@@ -2,11 +2,10 @@ package academy.littlewitch.bot.commands.jinyan;
 
 import academy.littlewitch.bot.commands.GeneralUtilCommands;
 import academy.littlewitch.bot.config.Configuration;
-import academy.littlewitch.bot.utils.Pair;
+import academy.littlewitch.utils.Pair;
 import cc.moecraft.icq.command.CommandProperties;
 import cc.moecraft.icq.command.interfaces.GroupCommand;
 import cc.moecraft.icq.event.events.message.EventGroupMessage;
-import cc.moecraft.icq.sender.message.MessageBuilder;
 import cc.moecraft.icq.sender.message.components.ComponentAt;
 import cc.moecraft.icq.user.Group;
 import cc.moecraft.icq.user.GroupUser;

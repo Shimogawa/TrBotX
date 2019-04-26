@@ -6,7 +6,12 @@
 
     <groupId>com.github.shimogawa</groupId>
     <artifactId>TrBotX</artifactId>
-    <version>1.0</version>
+    <version>0.4.6</version>
+
+    <properties>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.source>1.8</maven.compiler.source>
+    </properties>
 
     <repositories>
         <repository>

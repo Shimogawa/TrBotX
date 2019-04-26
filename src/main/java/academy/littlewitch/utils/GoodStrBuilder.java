@@ -1,4 +1,4 @@
-package academy.littlewitch.bot.utils;
+package academy.littlewitch.utils;
 
 public class GoodStrBuilder implements CharSequence {
     private StringBuilder sb;

@@ -1,4 +1,4 @@
-package academy.littlewitch.bot.utils;
+package academy.littlewitch.utils;
 
 import org.apache.commons.lang3.StringUtils;
 

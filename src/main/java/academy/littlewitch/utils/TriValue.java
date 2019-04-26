@@ -1,4 +1,4 @@
-package academy.littlewitch.bot.utils;
+package academy.littlewitch.utils;
 
 public class TriValue<T1, T2, T3> {
     public T1 elem1;

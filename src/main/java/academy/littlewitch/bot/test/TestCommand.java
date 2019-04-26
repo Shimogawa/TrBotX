@@ -1,6 +1,6 @@
 package academy.littlewitch.bot.test;
 
-import academy.littlewitch.bot.utils.Util;
+import academy.littlewitch.utils.Util;
 import cc.moecraft.icq.command.CommandProperties;
 import cc.moecraft.icq.command.interfaces.EverywhereCommand;
 import cc.moecraft.icq.event.events.message.EventMessage;

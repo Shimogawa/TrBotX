@@ -1,4 +1,4 @@
-package academy.littlewitch.bot.utils;
+package academy.littlewitch.utils;
 
 public class Pair<T1, T2> {
     public T1 elem1;

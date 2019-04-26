@@ -1,7 +1,7 @@
 package academy.littlewitch.bot.net;
 
 import academy.littlewitch.bot.net.httpobj.ResponseInfo;
-import academy.littlewitch.bot.utils.KeyValuePair;
+import academy.littlewitch.utils.KeyValuePair;
 
 import java.io.BufferedReader;
 import java.io.IOException;

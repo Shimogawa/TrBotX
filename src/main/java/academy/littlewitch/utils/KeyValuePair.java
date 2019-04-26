@@ -1,4 +1,4 @@
-package academy.littlewitch.bot.utils;
+package academy.littlewitch.utils;
 
 public class KeyValuePair<K, V> {
     private K key;

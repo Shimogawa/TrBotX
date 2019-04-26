@@ -1,7 +1,7 @@
 package academy.littlewitch.bot.commands.groupcommands;
 
 import academy.littlewitch.bot.config.Configuration;
-import academy.littlewitch.bot.utils.Util;
+import academy.littlewitch.utils.Util;
 import cc.moecraft.icq.command.CommandProperties;
 import cc.moecraft.icq.command.interfaces.PrivateCommand;
 import cc.moecraft.icq.event.events.message.EventPrivateMessage;
