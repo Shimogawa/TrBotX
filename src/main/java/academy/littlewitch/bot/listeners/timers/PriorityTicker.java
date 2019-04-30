@@ -1,5 +1,6 @@
 package academy.littlewitch.bot.listeners.timers;
 
+import academy.littlewitch.utils.Action;
 import cn.hutool.cron.task.Task;
 
 import java.util.ArrayList;
@@ -10,7 +11,7 @@ public class PriorityTicker extends Ticker {
 
     private int totalLevels;
 
-    private ArrayList<Task>[] taskPool;
+    private ArrayList<Action>[] taskPool;
 
     /**
      * Create a priority ticker which ticks (does tasks) every given milliseconds.
@@ -25,17 +26,22 @@ public class PriorityTicker extends Ticker {
     }
 
     @Override
-    public PriorityTicker addTask(Task task) {
+    public PriorityTicker addTask(Action task) {
         return addTask(task, 0);
     }
 
-    public PriorityTicker addTask(Task task, int priority) {
+    public PriorityTicker addTask(Action task, int priority) {
 
         return this;
     }
 
     @Override
     public void run() {
+
+    }
+
+    @Override
+    public void stop() {
 
     }
 }

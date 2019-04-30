@@ -1,10 +1,12 @@
 package academy.littlewitch.bot.listeners.timers;
 
-import cn.hutool.cron.task.Task;
+import academy.littlewitch.utils.Action;
 
 public abstract class Ticker implements Runnable {
 
     protected long tickInterval;
+
+    protected boolean isRunning = false;
 
     /**
      * Create a ticker which ticks (does tasks) every given milliseconds.
@@ -19,5 +21,7 @@ public abstract class Ticker implements Runnable {
      * @param task
      * @return
      */
-    public abstract Ticker addTask(Task task);
+    public abstract Ticker addTask(Action task);
+
+    public abstract void stop();
 }

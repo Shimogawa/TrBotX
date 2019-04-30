@@ -1,6 +1,6 @@
 package academy.littlewitch.bot.listeners.timers;
 
-import cn.hutool.cron.task.Task;
+import academy.littlewitch.utils.Action;
 
 import java.util.LinkedList;
 
@@ -9,7 +9,7 @@ import java.util.LinkedList;
  */
 public class FcfsTicker extends Ticker {
 
-    private LinkedList<Task> taskPool = new LinkedList<>();
+    private LinkedList<Action> taskPool = new LinkedList<>();
 
     /**
      * Create a ticker which ticks (does tasks) every given milliseconds.
@@ -34,7 +34,7 @@ public class FcfsTicker extends Ticker {
      * @return
      */
     @Override
-    public FcfsTicker addTask(Task task) {
+    public FcfsTicker addTask(Action task) {
         taskPool.add(task);
         return this;
     }
@@ -44,16 +44,17 @@ public class FcfsTicker extends Ticker {
      * @param task
      * @return
      */
-    public FcfsTicker addTaskFirstPriority(Task task) {
+    public FcfsTicker addTaskFirstPriority(Action task) {
         taskPool.addFirst(task);
         return this;
     }
 
     @Override
     public void run() {
-        while (true) {
-            for (Task t : taskPool) {
-                t.execute();
+        isRunning = true;
+        while (isRunning) {
+            for (Action t : taskPool) {
+                t.exec();
             }
             try {
                 Thread.sleep(tickInterval);
@@ -61,5 +62,10 @@ public class FcfsTicker extends Ticker {
                 break;
             }
         }
+    }
+
+    @Override
+    public void stop() {
+        this.isRunning = false;
     }
 }
