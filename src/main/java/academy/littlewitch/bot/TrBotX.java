@@ -21,7 +21,7 @@ import cc.moecraft.icq.PicqConfig;
 import com.google.gson.JsonSyntaxException;
 
 public class TrBotX {
-    public static final String version = "v0.4.7.1";
+    public static final String version = "v0.4.7.2";
 
     private static PicqConfig botConfig;
 

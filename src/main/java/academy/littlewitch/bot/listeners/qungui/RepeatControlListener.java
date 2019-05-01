@@ -23,7 +23,7 @@ public class RepeatControlListener extends IcqListener {
             return;
         }
 
-        if (egm.getGroupUser(egm.senderId).getInfo() == null || egm.senderId == egm.getBotAccount().getId())
+        if (egm.getGroupUser(egm.senderId).getInfo() == null || egm.senderId == egm.getBotAccount().getId() || egm.isAdmin())
             return;
 
         if (!groupFuduTable.containsKey(egm.groupId)) {

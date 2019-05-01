@@ -13,11 +13,11 @@ public class ShuapinControlListener extends IcqListener {
 
     @EventHandler
     public void checkLength(EventGroupMessage egm) {
-        if (Configuration.config.debugMode && egm.groupId != 610531770) {
+        if (Configuration.config.debugMode) {
             return;
         }
 
-        if (egm.isAdmin())
+        if (egm.isAdmin() || egm.getGroupUser(egm.senderId).getInfo() == null)
             return;
 
         if (egm.rawMessage.length() <= Configuration.config.monitorConfig.maxLength &&
@@ -33,11 +33,11 @@ public class ShuapinControlListener extends IcqListener {
 
     @EventHandler
     public void checkShuapin(EventGroupMessage egm) {
-        if (Configuration.config.debugMode && egm.groupId != 610531770) {
+        if (Configuration.config.debugMode) {
             return;
         }
 
-        if (egm.isAdmin())
+        if (egm.isAdmin() || egm.getGroupUser(egm.senderId).getInfo() == null)
             return;
 
         if (!RepeatControlListener.personalRecords.containsKey(egm.groupId)) {
