@@ -6,7 +6,11 @@ Keep adding new functionality.
 
 ## Priority 1
 
-- [x] ~~Fix bugs that will count "announcements" and "Uploads" as spamming. (Fixed `v0.4.7`, 2019.04.30)~~
+- [x] ~~Fix bugs that will count "announcements" and "Uploads" as spamming.~~ (Fixed `v0.4.7`, 2019.04.30)
+- [x] ~~Support sending announcement.~~ (Updated `v0.4.8`, 2019.05.01)
+- [ ] Wait for `PicqBotX` fix the api verification.
+- [ ] Help document formatter !!**urgent**!!.
+- [ ] Argument parser. Need to restructure code.
 - [ ] Support change command config in chat (or command line, whichever is chosen depends) instead of changing config file and restarting the program.
 - [ ] Support commandline commands.
 - [ ] Batch jobs which will be done regularly after a period of time; also listing and cancelling jobs.

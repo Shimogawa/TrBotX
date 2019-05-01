@@ -20,4 +20,9 @@ public class SuperCommandConfig {
     public GlobalCommand groupSendCommand = new GlobalCommand(
             new CommandProperties("groupsend"), "群发消息"
     );
+
+    @SerializedName("群发公告指令设定")
+    public GlobalCommand sendAnnouncementCommand = new GlobalCommand(
+            new CommandProperties("announce"), "群发公告"
+    );
 }

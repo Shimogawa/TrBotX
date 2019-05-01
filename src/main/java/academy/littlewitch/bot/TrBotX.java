@@ -18,12 +18,18 @@ import academy.littlewitch.bot.listeners.qungui.ShuapinControlListener;
 import academy.littlewitch.utils.GoodStrBuilder;
 import cc.moecraft.icq.PicqBotX;
 import cc.moecraft.icq.PicqConfig;
+import cc.moecraft.logger.environments.ColorSupportLevel;
 import com.google.gson.JsonSyntaxException;
 
 public class TrBotX {
-    public static final String version = "v0.4.7.2";
+    public static final String version = "v0.4.8.1";
 
     private static PicqConfig botConfig;
+
+    private static PicqBotX bot;
+
+    private static int botPort = 31092;
+    private static int apiPort = 31091;
 
     public static void main(String[] args) {
         if (parseArgs(args)) {
@@ -37,6 +43,10 @@ public class TrBotX {
         start();
     }
 
+    public static PicqBotX getBot() {
+        return bot;
+    }
+
     private static boolean parseArgs(String[] args) {
         if (args.length == 0)
             return false;
@@ -47,15 +57,16 @@ public class TrBotX {
                     .append("-h\t| help").newLine()
                     .append("-v\t| version info").newLine()
                     .append("-c\t| Check the config file (will create if not exist)").newLine()
-                    .append("-g\t| Generates the config file (won't generate if exists)").newLine();
+                    .append("-g\t| Generates the config file (won't generate if exists)").newLine()
+                    .append("-u\t| Update the config file").newLine()
+                    .append("--port-bot port\t| Bot's port (default 31092)").newLine()
+                    .append("--port-api port\t| Http api's port (default 31091)").newLine();
             System.out.println(sb.toString());
             return true;
-        }
-        if ("-v".equals(args[0].toLowerCase())) {
+        } else if ("-v".equals(args[0].toLowerCase())) {
             System.out.println("TrBotX " + version);
             return true;
-        }
-        if ("-c".equals(args[0].toLowerCase())) {
+        } else if ("-c".equals(args[0].toLowerCase())) {
             try {
                 Configuration.getConfig();
                 System.out.println("No error found. Config file correct.");
@@ -64,12 +75,40 @@ public class TrBotX {
                 System.out.println(e.getMessage());
             }
             return true;
-        }
-        if ("-g".equals(args[0].toLowerCase())) {
+        } else if ("-g".equals(args[0].toLowerCase())) {
             boolean b = Configuration.newConfig();
             System.out.println(b ? "Config file created." : "Config file already exist.");
             return true;
+        } else if ("-u".equals(args[0].toLowerCase())) {
+            try {
+                Configuration.getConfig();
+            } catch (JsonSyntaxException e) {
+                System.out.println("There is error in config file. Use -c to check.");
+                return true;
+            }
+            Configuration.saveConfig();
+            return true;
+        } else {    // can be multiple arguments
+            if (args.length >= 2 && args.length % 2 == 0) {
+                int botPos = "--port-bot".equals(args[0].toLowerCase()) ? 0 :
+                        "--port-bot".equals(args[2].toLowerCase()) ? 2 : -1;
+                int apiPos = "--port-api".equals(args[0].toLowerCase()) ? 0 :
+                        "--port-api".equals(args[2].toLowerCase()) ? 2 : -1;
+                if (botPos != -1) {
+                    try {
+                        botPort = Integer.parseInt(args[botPos + 1]);
+                        return true;
+                    } catch (NumberFormatException e) {}
+                }
+                if (apiPos != -1) {
+                    try {
+                        apiPort = Integer.parseInt(args[apiPos + 1]);
+                        return true;
+                    } catch (NumberFormatException e) {}
+                }
+            }
         }
+
         System.out.println("Incorrect command. -h for help.");
         return true;
     }
@@ -85,11 +124,12 @@ public class TrBotX {
     }
 
     private static void prepreparation() {
-//        Configuration.saveConfig();
-        botConfig = new PicqConfig(31092);
+        botConfig = new PicqConfig(botPort);
         botConfig.setMultiAccountOptimizations(false);
         botConfig.setApiAsync(true);
         botConfig.setCommandArgsSplitRegex("\\s");
+        botConfig.setColorSupportLevel(ColorSupportLevel.OS_DEPENDENT);
+        botConfig.setNoVerify(true);
     }
 
     private static void start() {
@@ -97,8 +137,8 @@ public class TrBotX {
 //                false, ColorSupportLevel.OS_DEPENDENT, "logs", "PicqBotX-Log");
 //        bot.setHttpApiVersionDetection(".*");
 //        bot.setMultiAccountOptimizations(false);
-        PicqBotX bot = new PicqBotX(botConfig);
-        bot.addAccount("Bot01", "127.0.0.1", 31091);
+        bot = new PicqBotX(botConfig);
+        bot.addAccount("Bot01", "127.0.0.1", apiPort);
 
         // Debug Mode
         if (Configuration.config.debugMode) {

@@ -1,7 +1,16 @@
 package academy.littlewitch.bot.net;
 
+import academy.littlewitch.bot.TrBotX;
 import academy.littlewitch.bot.net.httpobj.ResponseInfo;
 import academy.littlewitch.utils.KeyValuePair;
+import cc.moecraft.icq.sender.returndata.RawReturnData;
+import cc.moecraft.icq.utils.NetUtils;
+import cc.moecraft.utils.MapBuilder;
+import cn.hutool.http.HttpRequest;
+import cn.hutool.json.JSONObject;
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -9,12 +18,26 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.*;
 import java.nio.charset.StandardCharsets;
+import java.util.Map;
 import java.util.StringJoiner;
 
 public class HttpUtils {
     private static final String USER_AGENT = "Mozilla/5.0";
 
     private HttpUtils() {}
+
+    public static RawReturnData sendThroughApi(String api, Object... params) {
+        Map map = MapBuilder.build(String.class, Object.class, params);
+        String host = TrBotX.getBot().getAccountManager().getAccounts().get(0).getPostUrl();
+        int port = TrBotX.getBot().getAccountManager().getAccounts().get(0).getPostPort();
+        String url = NetUtils.url(host, port) + api;
+        HttpRequest request = HttpRequest.post(url).body(new JSONObject(map)).timeout(5000);
+        if (!TrBotX.getBot().getConfig().getAccessToken().isEmpty()) {
+            request.header("Authorization", "Bearer " + TrBotX.getBot().getConfig().getAccessToken());
+        }
+        JsonElement je = (new JsonParser()).parse(request.execute().body());
+        return (new Gson()).fromJson(je, RawReturnData.class);
+    }
 
     public static ResponseInfo sendGetHttp(String url) {
         URL urlObj = formURL(url);
