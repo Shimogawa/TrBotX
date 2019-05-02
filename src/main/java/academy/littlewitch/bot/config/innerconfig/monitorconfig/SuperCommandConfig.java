@@ -25,4 +25,9 @@ public class SuperCommandConfig {
     public GlobalCommand sendAnnouncementCommand = new GlobalCommand(
             new CommandProperties("announce"), "群发公告"
     );
+
+    @SerializedName("私聊指令设定")
+    public GlobalCommand sendPrivateCommand = new GlobalCommand(
+            new CommandProperties("privatesend"), "私聊发送消息"
+    );
 }

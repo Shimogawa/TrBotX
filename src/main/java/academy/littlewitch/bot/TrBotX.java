@@ -6,10 +6,7 @@ import academy.littlewitch.bot.commands.help.HelpCommand;
 import academy.littlewitch.bot.commands.jinyan.StartVoteJinyanCommand;
 import academy.littlewitch.bot.commands.math.CalculatorCommand;
 import academy.littlewitch.bot.commands.math.MathCommand;
-import academy.littlewitch.bot.commands.supercommand.ChangeConfigCommand;
-import academy.littlewitch.bot.commands.supercommand.GroupSendCommand;
-import academy.littlewitch.bot.commands.supercommand.SendAnnouncementCommand;
-import academy.littlewitch.bot.commands.supercommand.ServerMonitorCommand;
+import academy.littlewitch.bot.commands.supercommand.*;
 import academy.littlewitch.bot.commands.version.VersionCommand;
 import academy.littlewitch.bot.config.Configuration;
 import academy.littlewitch.bot.test.TestCommand;
@@ -24,7 +21,7 @@ import cc.moecraft.logger.environments.ColorSupportLevel;
 import com.google.gson.JsonSyntaxException;
 
 public class TrBotX {
-    public static final String version = "v0.4.8.2";
+    public static final String version = "v0.4.8.11";
 
     private static PicqConfig botConfig;
 
@@ -177,7 +174,8 @@ public class TrBotX {
                         new WeatherInfoCommand(),
                         new ServerMonitorCommand(),
                         new GroupSendCommand(),
-                        new SendAnnouncementCommand()
+                        new SendAnnouncementCommand(),
+                        new PrivateSendCommand()
                 );
 
         bot.startBot();

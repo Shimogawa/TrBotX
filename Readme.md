@@ -23,4 +23,6 @@ Thanks:
 
 - Updated package to newest version.
 - Fixed api verification problem.
+- Added command to send group messages.
 - Added command to send announcement.
+- Added command to send private messages.
