@@ -21,7 +21,7 @@ import cc.moecraft.logger.environments.ColorSupportLevel;
 import com.google.gson.JsonSyntaxException;
 
 public class TrBotX {
-    public static final String version = "v0.4.8.11";
+    public static final String version = "v0.4.8.12";
 
     private static PicqConfig botConfig;
 
