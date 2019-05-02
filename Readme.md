@@ -1,4 +1,4 @@
-# TrBotX 0.4
+# TrBotX 0.4.8
 
 [简体中文](Docs/Readme-cn.md)
 
@@ -16,3 +16,11 @@ Thanks:
 ## Not for
 
 - Making fun of the bot.
+
+## Version History
+
+### v0.4.8
+
+- Updated package to newest version.
+- Fixed api verification problem.
+- Added command to send announcement.

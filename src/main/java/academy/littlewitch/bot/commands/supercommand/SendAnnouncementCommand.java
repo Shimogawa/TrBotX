@@ -17,9 +17,9 @@ public class SendAnnouncementCommand implements PrivateCommand {
             return null;
         if (!Configuration.config.superManagers.contains(user.getId()))
             return null;
-        if (arrayList.size() == 0)
-            return null;
         String[] all = eventPrivateMessage.rawMessage.split("\n", 3);
+        if (all.length < 3)
+            return "请使用一（1）个回车分隔指令与标题与内容";
         for (String sss : all) {
             if (StringUtils.isEmpty(sss)) {
                 return "请使用一（1）个回车分隔指令与标题与内容";

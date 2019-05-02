@@ -8,6 +8,7 @@ import academy.littlewitch.bot.commands.math.CalculatorCommand;
 import academy.littlewitch.bot.commands.math.MathCommand;
 import academy.littlewitch.bot.commands.supercommand.ChangeConfigCommand;
 import academy.littlewitch.bot.commands.supercommand.GroupSendCommand;
+import academy.littlewitch.bot.commands.supercommand.SendAnnouncementCommand;
 import academy.littlewitch.bot.commands.supercommand.ServerMonitorCommand;
 import academy.littlewitch.bot.commands.version.VersionCommand;
 import academy.littlewitch.bot.config.Configuration;
@@ -18,11 +19,12 @@ import academy.littlewitch.bot.listeners.qungui.ShuapinControlListener;
 import academy.littlewitch.utils.GoodStrBuilder;
 import cc.moecraft.icq.PicqBotX;
 import cc.moecraft.icq.PicqConfig;
+import cc.moecraft.icq.PicqConstants;
 import cc.moecraft.logger.environments.ColorSupportLevel;
 import com.google.gson.JsonSyntaxException;
 
 public class TrBotX {
-    public static final String version = "v0.4.8.1";
+    public static final String version = "v0.4.8.2";
 
     private static PicqConfig botConfig;
 
@@ -39,6 +41,7 @@ public class TrBotX {
             return;
         }
         prepreparation();
+        preparation();
         Runtime.getRuntime().addShutdownHook(new Thread(TrBotX::onShutdown));
         start();
     }
@@ -124,6 +127,10 @@ public class TrBotX {
     }
 
     private static void prepreparation() {
+        PicqConstants.HTTP_API_VERSION_DETECTION = ".*";
+    }
+
+    private static void preparation() {
         botConfig = new PicqConfig(botPort);
         botConfig.setMultiAccountOptimizations(false);
         botConfig.setApiAsync(true);
@@ -169,7 +176,8 @@ public class TrBotX {
                         new HireMultiplayerCommand(),
                         new WeatherInfoCommand(),
                         new ServerMonitorCommand(),
-                        new GroupSendCommand()
+                        new GroupSendCommand(),
+                        new SendAnnouncementCommand()
                 );
 
         bot.startBot();

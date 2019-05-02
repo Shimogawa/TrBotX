@@ -23,7 +23,7 @@
         <dependency>
             <groupId>com.github.hydevelop</groupId>
             <artifactId>PicqBotX</artifactId>
-            <version>3.2.2.892</version>
+            <version>3.2.2.896</version>
         </dependency>
         <dependency>
             <groupId>com.google.code.gson</groupId>
