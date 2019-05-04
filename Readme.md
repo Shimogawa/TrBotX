@@ -26,3 +26,4 @@ Thanks:
 - Added command to send group messages.
 - Added command to send announcement.
 - Added command to send private messages.
+- Commandline argument parser integrated. (2019.05.03)
