@@ -13,15 +13,15 @@ import academy.littlewitch.bot.test.TestCommand;
 import academy.littlewitch.bot.test.TestListener;
 import academy.littlewitch.bot.listeners.qungui.RepeatControlListener;
 import academy.littlewitch.bot.listeners.qungui.ShuapinControlListener;
-import academy.littlewitch.utils.GoodStrBuilder;
 import cc.moecraft.icq.PicqBotX;
 import cc.moecraft.icq.PicqConfig;
 import cc.moecraft.icq.PicqConstants;
 import cc.moecraft.logger.environments.ColorSupportLevel;
 import com.google.gson.JsonSyntaxException;
+import org.apache.commons.cli.*;
 
 public class TrBotX {
-    public static final String version = "v0.4.8.12";
+    public static final String version = "v0.4.8.17";
 
     private static PicqConfig botConfig;
 
@@ -31,9 +31,10 @@ public class TrBotX {
     private static int apiPort = 31091;
 
     public static void main(String[] args) {
-        if (parseArgs(args)) {
+        if (!parseArgs(args)) {
             return;
         }
+
         if (!readConfiguration()) {
             return;
         }
@@ -48,25 +49,50 @@ public class TrBotX {
     }
 
     private static boolean parseArgs(String[] args) {
-        if (args.length == 0)
+        Options options = new Options();
+        Option o = new Option("h", "help", false, "Get help");
+        options.addOption(o);
+
+        o = new Option("v", "version", false, "Version info");
+        options.addOption(o);
+
+        o = new Option("c", false, "Check the config file (will create if not exist)");
+        options.addOption(o);
+
+        o = new Option("g", false, "Generates the config file (won't generate if exists)");
+        options.addOption(o);
+
+        o = new Option("u", false, "Update the config file");
+        options.addOption(o);
+
+        o = new Option(null, "port-bot", true, "Bot's port (default 31092)");
+        options.addOption(o);
+
+        o = new Option(null, "port-api", true, "Http api's port (default 31091)");
+        options.addOption(o);
+
+        CommandLineParser parser = new DefaultParser();
+        HelpFormatter formatter = new HelpFormatter();
+        CommandLine cmd;
+
+        try {
+            cmd = parser.parse(options, args);
+        } catch (ParseException e) {
+            System.out.println(e.getMessage());
+            formatter.printHelp("TrBotX [options]", options);
             return false;
-        if ("-h".equals(args[0].toLowerCase())) {
-            GoodStrBuilder sb = new GoodStrBuilder();
-            sb.append("TrBotX ")
-                    .append(version).newLine()
-                    .append("-h\t| help").newLine()
-                    .append("-v\t| version info").newLine()
-                    .append("-c\t| Check the config file (will create if not exist)").newLine()
-                    .append("-g\t| Generates the config file (won't generate if exists)").newLine()
-                    .append("-u\t| Update the config file").newLine()
-                    .append("--port-bot port\t| Bot's port (default 31092)").newLine()
-                    .append("--port-api port\t| Http api's port (default 31091)").newLine();
-            System.out.println(sb.toString());
-            return true;
-        } else if ("-v".equals(args[0].toLowerCase())) {
+        }
+
+        if (cmd.hasOption('h')) {
             System.out.println("TrBotX " + version);
-            return true;
-        } else if ("-c".equals(args[0].toLowerCase())) {
+            formatter.printHelp("TrBotX [options]", options);
+            return false;
+        }
+        if (cmd.hasOption('v')) {
+            System.out.println("TrBotX " + version);
+            return false;
+        }
+        if (cmd.hasOption('c')) {
             try {
                 Configuration.getConfig();
                 System.out.println("No error found. Config file correct.");
@@ -74,42 +100,39 @@ public class TrBotX {
                 System.out.print("There is syntax error: ");
                 System.out.println(e.getMessage());
             }
-            return true;
-        } else if ("-g".equals(args[0].toLowerCase())) {
-            boolean b = Configuration.newConfig();
-            System.out.println(b ? "Config file created." : "Config file already exist.");
-            return true;
-        } else if ("-u".equals(args[0].toLowerCase())) {
+            return false;
+        }
+        if (cmd.hasOption('g')) {
+            System.out.println(Configuration.newConfig() ?
+                    "Config file created." : "Config file already exist.");
+            return false;
+        }
+        if (cmd.hasOption('u')) {
             try {
                 Configuration.getConfig();
             } catch (JsonSyntaxException e) {
                 System.out.println("There is error in config file. Use -c to check.");
-                return true;
+                return false;
             }
             Configuration.saveConfig();
-            return true;
-        } else {    // can be multiple arguments
-            if (args.length >= 2 && args.length % 2 == 0) {
-                int botPos = "--port-bot".equals(args[0].toLowerCase()) ? 0 :
-                        "--port-bot".equals(args[2].toLowerCase()) ? 2 : -1;
-                int apiPos = "--port-api".equals(args[0].toLowerCase()) ? 0 :
-                        "--port-api".equals(args[2].toLowerCase()) ? 2 : -1;
-                if (botPos != -1) {
-                    try {
-                        botPort = Integer.parseInt(args[botPos + 1]);
-                        return true;
-                    } catch (NumberFormatException e) {}
-                }
-                if (apiPos != -1) {
-                    try {
-                        apiPort = Integer.parseInt(args[apiPos + 1]);
-                        return true;
-                    } catch (NumberFormatException e) {}
-                }
+            return false;
+        }
+        if (cmd.hasOption("port-bot")) {
+            try {
+                botPort = Integer.parseInt(cmd.getOptionValue("port-bot"));
+            } catch (NumberFormatException e) {
+                formatter.printHelp("TrBotX [options]", options);
+                return false;
             }
         }
-
-        System.out.println("Incorrect command. -h for help.");
+        if (cmd.hasOption("port-api")) {
+            try {
+                apiPort = Integer.parseInt(cmd.getOptionValue("port-api"));
+            } catch (NumberFormatException e) {
+                formatter.printHelp("TrBotX [options]", options);
+                return false;
+            }
+        }
         return true;
     }
 

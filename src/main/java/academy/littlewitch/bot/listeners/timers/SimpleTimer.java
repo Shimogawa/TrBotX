@@ -32,10 +32,11 @@ public class SimpleTimer implements Runnable {
     @Override
     public void run() {
         isRunning = true;
-        long lastChecked = System.currentTimeMillis();
         while (isRunning) {
+            long lastChecked = System.currentTimeMillis();
             task.exec();
-            while (System.currentTimeMillis() - lastChecked < tickInterval) {
+            while (tickInterval - (System.currentTimeMillis() - lastChecked)
+                    > refreshInterval) {
                 try {
                     Thread.sleep(refreshInterval);
                 } catch (InterruptedException e) {
@@ -43,6 +44,7 @@ public class SimpleTimer implements Runnable {
                     break;
                 }
             }
+            while (isRunning && System.currentTimeMillis() - lastChecked < tickInterval) {}
         }
     }
 
