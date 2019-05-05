@@ -4,9 +4,15 @@ import academy.littlewitch.utils.Action;
 
 public abstract class Ticker implements Runnable {
 
-    protected long tickInterval;
+    protected final long tickInterval;
 
     protected boolean isRunning = false;
+
+    protected long lastExecuted;
+
+    protected long nextInterval;
+
+    protected long executionDelta = 0;
 
     /**
      * Create a ticker which ticks (does tasks) every given milliseconds.
@@ -14,6 +20,7 @@ public abstract class Ticker implements Runnable {
      */
     public Ticker(long milliseconds) {
         this.tickInterval = milliseconds;
+        this.nextInterval = milliseconds;
     }
 
     /**
@@ -24,4 +31,10 @@ public abstract class Ticker implements Runnable {
     public abstract Ticker addTask(Action task);
 
     public abstract void stop();
+
+    public void recalculate() {
+        long thisInterval = System.currentTimeMillis() - lastExecuted;
+        long delta = thisInterval + executionDelta - tickInterval;
+        nextInterval = tickInterval - delta;
+    }
 }

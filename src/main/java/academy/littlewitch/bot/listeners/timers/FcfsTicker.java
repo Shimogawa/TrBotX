@@ -53,14 +53,17 @@ public class FcfsTicker extends Ticker {
     public void run() {
         isRunning = true;
         while (isRunning) {
+            lastExecuted = System.currentTimeMillis();
             for (Action t : taskPool) {
                 t.exec();
             }
+            executionDelta = System.currentTimeMillis() - lastExecuted;
             try {
-                Thread.sleep(tickInterval);
+                Thread.sleep(nextInterval);
             } catch (InterruptedException e) {
                 break;
             }
+            recalculate();
         }
     }
 

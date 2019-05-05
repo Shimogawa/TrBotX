@@ -21,7 +21,7 @@ import com.google.gson.JsonSyntaxException;
 import org.apache.commons.cli.*;
 
 public class TrBotX {
-    public static final String version = "v0.4.8.17";
+    public static final String version = "v0.4.8.19";
 
     private static PicqConfig botConfig;
 

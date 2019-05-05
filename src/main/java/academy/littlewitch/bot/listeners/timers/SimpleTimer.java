@@ -29,6 +29,13 @@ public class SimpleTimer implements Runnable {
         this.task = task;
     }
 
+    public void addTask(Action action) {
+        if (task == null) {
+            task = action;
+        }
+        task = task.join(action);
+    }
+
     @Override
     public void run() {
         isRunning = true;
