@@ -1,8 +1,8 @@
 package academy.littlewitch.bot.commands.groupcommands;
 
 import academy.littlewitch.bot.config.Configuration;
-import academy.littlewitch.bot.net.HttpUtils;
-import academy.littlewitch.bot.net.httpobj.ResponseInfo;
+import academy.littlewitch.utils.net.HttpUtils;
+import academy.littlewitch.utils.net.httpobj.ResponseInfo;
 import cc.moecraft.icq.command.CommandProperties;
 import cc.moecraft.icq.command.interfaces.GroupCommand;
 import cc.moecraft.icq.event.events.message.EventGroupMessage;

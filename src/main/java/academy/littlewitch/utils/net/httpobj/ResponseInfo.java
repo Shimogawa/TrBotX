@@ -1,4 +1,4 @@
-package academy.littlewitch.bot.net.httpobj;
+package academy.littlewitch.utils.net.httpobj;
 
 public class ResponseInfo {
     private int responseCode;

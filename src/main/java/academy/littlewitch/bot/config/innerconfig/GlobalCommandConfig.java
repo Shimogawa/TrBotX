@@ -58,11 +58,4 @@ public class GlobalCommandConfig {
             "数学公式",
             false
     );
-
-    @SerializedName("计算器指令设定")
-    public GlobalCommand calculatorCommand = new GlobalCommand(
-            new CommandProperties("calc"),
-            "计算器",
-            false
-    );
 }

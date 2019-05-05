@@ -6,7 +6,7 @@
 
     <groupId>com.github.shimogawa</groupId>
     <artifactId>TrBotX</artifactId>
-    <version>0.4.7</version>
+    <version>(&gt;.&lt;)w</version>
 
     <properties>
         <maven.compiler.target>1.8</maven.compiler.target>
@@ -23,7 +23,7 @@
         <dependency>
             <groupId>com.github.hydevelop</groupId>
             <artifactId>PicqBotX</artifactId>
-            <version>3.2.2.896</version>
+            <version>4.10.1.928</version>
         </dependency>
         <dependency>
             <groupId>com.google.code.gson</groupId>

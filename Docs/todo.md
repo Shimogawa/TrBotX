@@ -11,7 +11,7 @@ Keep adding new functionality.
 - [x] ~~Fix api verification.~~ (Fixed `v0.4.8`, 2019.05.01, credits @Hykilpikonna)
 - [ ] Help document formatter.
 - [x] ~~Argument parser. Need to restructure code.~~ (Updated `v0.4.8`, 2019.05.03)
-- [ ] Support change command config in chat (or command line, whichever is chosen depends) instead of changing config file and restarting the program.
+- [x] ~~Support change command config in chat (or command line, whichever is chosen depends) instead of changing config file and restarting the program.~~ (Use js script engine)(Updated `v0.4.9`, 2019.05.05)
 - [ ] Support commandline commands in program.
 - [ ] Batch jobs which will be done regularly after a period of time; also listing and cancelling jobs.
 

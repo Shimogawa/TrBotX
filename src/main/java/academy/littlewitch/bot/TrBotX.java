@@ -4,7 +4,7 @@ import academy.littlewitch.bot.commands.groupcommands.HireMultiplayerCommand;
 import academy.littlewitch.bot.commands.groupcommands.WeatherInfoCommand;
 import academy.littlewitch.bot.commands.help.HelpCommand;
 import academy.littlewitch.bot.commands.jinyan.StartVoteJinyanCommand;
-import academy.littlewitch.bot.commands.math.CalculatorCommand;
+import academy.littlewitch.bot.commands.supercommand.UltimateCommand;
 import academy.littlewitch.bot.commands.math.MathCommand;
 import academy.littlewitch.bot.commands.supercommand.*;
 import academy.littlewitch.bot.commands.version.VersionCommand;
@@ -18,14 +18,19 @@ import cc.moecraft.icq.PicqConfig;
 import cc.moecraft.icq.PicqConstants;
 import cc.moecraft.logger.environments.ColorSupportLevel;
 import com.google.gson.JsonSyntaxException;
+import jdk.nashorn.api.scripting.NashornScriptEngineFactory;
 import org.apache.commons.cli.*;
 
+import javax.script.ScriptEngine;
+
 public class TrBotX {
-    public static final String version = "v0.4.8.19";
+    public static final String version = "v0.4.9.3";
 
     private static PicqConfig botConfig;
 
     private static PicqBotX bot;
+
+    private static ScriptEngine jsEngine;
 
     private static int botPort = 31092;
     private static int apiPort = 31091;
@@ -46,6 +51,10 @@ public class TrBotX {
 
     public static PicqBotX getBot() {
         return bot;
+    }
+
+    public static ScriptEngine getJsEngine() {
+        return jsEngine;
     }
 
     private static boolean parseArgs(String[] args) {
@@ -148,6 +157,11 @@ public class TrBotX {
 
     private static void prepreparation() {
         PicqConstants.HTTP_API_VERSION_DETECTION = ".*";
+        NashornScriptEngineFactory factory = new NashornScriptEngineFactory();
+        jsEngine = factory.getScriptEngine();
+
+        jsEngine.put("config", Configuration.config);
+        jsEngine.put("bot", bot);
     }
 
     private static void preparation() {
@@ -188,7 +202,7 @@ public class TrBotX {
                 .registerCommands(
                         new HelpCommand(),
                         new StartVoteJinyanCommand(),
-                        new CalculatorCommand(),
+                        new UltimateCommand(),
                         new MathCommand(),
                         new ChangeConfigCommand(),
                         new VersionCommand(),

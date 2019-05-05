@@ -5,7 +5,6 @@ import academy.littlewitch.utils.Action;
 import java.util.ArrayList;
 import java.util.TreeMap;
 
-@Deprecated
 public class PriorityTicker extends Ticker {
 
     private TreeMap<Integer, ArrayList<Action>> taskPool;

@@ -1,7 +1,7 @@
 package academy.littlewitch.steam.auth;
 
-import academy.littlewitch.bot.net.HttpUtils;
-import academy.littlewitch.bot.net.httpobj.ResponseInfo;
+import academy.littlewitch.utils.net.HttpUtils;
+import academy.littlewitch.utils.net.httpobj.ResponseInfo;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
