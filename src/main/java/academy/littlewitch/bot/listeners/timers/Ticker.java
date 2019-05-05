@@ -32,9 +32,11 @@ public abstract class Ticker implements Runnable {
 
     public abstract void stop();
 
-    public void recalculate() {
+    protected void sleepAndRecalculate() throws InterruptedException {
+        executionDelta = System.currentTimeMillis() - lastExecuted;
+        Thread.sleep(nextInterval - executionDelta);
         long thisInterval = System.currentTimeMillis() - lastExecuted;
-        long delta = thisInterval + executionDelta - tickInterval;
+        long delta = thisInterval + executionDelta;
         nextInterval = tickInterval - delta;
     }
 }

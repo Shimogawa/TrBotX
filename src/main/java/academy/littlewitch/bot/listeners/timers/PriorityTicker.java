@@ -50,13 +50,11 @@ public class PriorityTicker extends Ticker {
                     a.exec();
                 }
             }
-            executionDelta = System.currentTimeMillis() - lastExecuted;
             try {
-                Thread.sleep(nextInterval);
+                sleepAndRecalculate();
             } catch (InterruptedException e) {
                 break;
             }
-            recalculate();
         }
     }
 

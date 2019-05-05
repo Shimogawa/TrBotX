@@ -27,3 +27,4 @@ Thanks:
 - Added command to send announcement.
 - Added command to send private messages.
 - Commandline argument parser integrated. (2019.05.03)
+- Tickers implementation finished. (2019.05.05)
