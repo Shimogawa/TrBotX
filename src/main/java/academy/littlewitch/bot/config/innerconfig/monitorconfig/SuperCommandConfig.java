@@ -30,4 +30,10 @@ public class SuperCommandConfig {
     public GlobalCommand sendPrivateCommand = new GlobalCommand(
             new CommandProperties("privatesend"), "私聊发送消息"
     );
+
+    @SerializedName("终极指令设定")
+    public GlobalCommand ultimateCommand = new GlobalCommand(
+            new CommandProperties("ultimate"),
+            "终极指令，对于bot有100%控制权，使用js"
+    );
 }

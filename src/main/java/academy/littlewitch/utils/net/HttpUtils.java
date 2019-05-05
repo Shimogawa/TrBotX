@@ -1,7 +1,7 @@
-package academy.littlewitch.bot.net;
+package academy.littlewitch.utils.net;
 
 import academy.littlewitch.bot.TrBotX;
-import academy.littlewitch.bot.net.httpobj.ResponseInfo;
+import academy.littlewitch.utils.net.httpobj.ResponseInfo;
 import academy.littlewitch.utils.KeyValuePair;
 import cc.moecraft.icq.sender.returndata.RawReturnData;
 import cc.moecraft.icq.utils.NetUtils;
@@ -26,6 +26,7 @@ public class HttpUtils {
 
     private HttpUtils() {}
 
+    @Deprecated
     public static RawReturnData sendThroughApi(String api, Object... params) {
         Map map = MapBuilder.build(String.class, Object.class, params);
         String host = TrBotX.getBot().getAccountManager().getAccounts().get(0).getPostUrl();
