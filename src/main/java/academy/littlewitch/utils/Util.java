@@ -53,4 +53,17 @@ public class Util {
         String pre = (si ? "kMGTPE" : "KMGTPE").charAt(exp-1) + (si ? "" : "i");
         return String.format("%.1f %sB", bytes / Math.pow(unit, exp), pre);
     }
+
+    public static String toDateString(long milli) {
+        return toDateString("%02d:%02d:%02d.%d", milli);
+    }
+
+    public static String toDateString(String format, long milli) {
+        long millis = milli % 1000;
+        long second = (milli / 1000) % 60;
+        long minute = (milli / (1000 * 60)) % 60;
+        long hour = (milli / (1000 * 60 * 60)) % 24;
+
+        return String.format(format, hour, minute, second, millis);
+    }
 }

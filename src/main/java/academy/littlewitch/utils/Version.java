@@ -45,10 +45,10 @@ public class Version implements Comparable<Version> {
 
     @Override
     public int compareTo(Version o) {
-        return this.major != o.major ? this.major - o.major
-                : this.minor != o.minor ? this.minor - o.minor
-                : this.maintainance != o.maintainance ? this.maintainance - o.maintainance
-                : this.build != o.build ? this.build - o.build
+        return  this.major != o.major                   ? this.major - o.major
+                : this.minor != o.minor                 ? this.minor - o.minor
+                : this.maintainance != o.maintainance   ? this.maintainance - o.maintainance
+                : this.build != o.build                 ? this.build - o.build
                 : 0;
     }
 

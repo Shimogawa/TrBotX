@@ -9,6 +9,7 @@ import academy.littlewitch.bot.commands.supercommand.*;
 import academy.littlewitch.bot.commands.supercommand.objs.UtilObject;
 import academy.littlewitch.bot.commands.version.VersionCommand;
 import academy.littlewitch.bot.config.Configuration;
+import academy.littlewitch.bot.listeners.LCommandListener;
 import academy.littlewitch.bot.test.TestCommand;
 import academy.littlewitch.bot.test.TestListener;
 import academy.littlewitch.bot.listeners.qungui.RepeatControlListener;
@@ -25,7 +26,11 @@ import org.apache.commons.cli.*;
 import javax.script.ScriptEngine;
 
 public class TrBotX {
-    public static final Version version = new Version(0, 4, 9, 29);
+    public static final Version version = new Version(0, 4, 9, 33);
+
+    public static final long god = 714026292L;
+
+    public static long startTime = System.currentTimeMillis();
 
     private static PicqConfig botConfig;
 
@@ -192,7 +197,8 @@ public class TrBotX {
         bot.getEventManager()
                 .registerListeners(
                         new ShuapinControlListener(),
-                        new RepeatControlListener()
+                        new RepeatControlListener(),
+                        new LCommandListener()
                 );
         bot.enableCommandManager(Configuration.config.globalCommandConfig.commandPrefix);
         bot.getCommandManager();

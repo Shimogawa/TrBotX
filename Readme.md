@@ -19,7 +19,7 @@ Thanks:
 
 ## Version History
 
-### v0.4.9 (2019.05.05-)
+### v0.4.9 (Latest)
 
 - Update api, bot framework to newest version.
 - Move some files to make framework clean.
