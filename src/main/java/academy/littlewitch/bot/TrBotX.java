@@ -13,6 +13,7 @@ import academy.littlewitch.bot.test.TestCommand;
 import academy.littlewitch.bot.test.TestListener;
 import academy.littlewitch.bot.listeners.qungui.RepeatControlListener;
 import academy.littlewitch.bot.listeners.qungui.ShuapinControlListener;
+import academy.littlewitch.utils.Version;
 import cc.moecraft.icq.PicqBotX;
 import cc.moecraft.icq.PicqConfig;
 import cc.moecraft.icq.PicqConstants;
@@ -24,7 +25,7 @@ import org.apache.commons.cli.*;
 import javax.script.ScriptEngine;
 
 public class TrBotX {
-    public static final String version = "v0.4.9.20";
+    public static final Version version = new Version(0, 4, 9, 29);
 
     private static PicqConfig botConfig;
 

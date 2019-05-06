@@ -1,4 +1,4 @@
-# TrBotX 0.4.8
+# TrBotX 0.4.9
 
 [简体中文](Docs/Readme-cn.md)
 
@@ -25,6 +25,7 @@ Thanks:
 - Move some files to make framework clean.
 - Remake the js command so that it can be used to change config of this bot.
 - _Experimental:_ ultimate command improvements with utilities written in java injected into the js engine.
+- Update the version command and added version checking function (with Github).
 
 ### v0.4.8
 
