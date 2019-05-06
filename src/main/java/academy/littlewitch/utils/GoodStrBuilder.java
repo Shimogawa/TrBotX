@@ -46,6 +46,11 @@ public class GoodStrBuilder implements CharSequence {
         return this;
     }
 
+    public GoodStrBuilder insert(int idx, char c) {
+        sb.insert(idx, c);
+        return this;
+    }
+
     public GoodStrBuilder newLine() {
         sb.append('\n');
         return this;
@@ -69,6 +74,23 @@ public class GoodStrBuilder implements CharSequence {
 
     public GoodStrBuilder deleteCharAt(int index) {
         sb.deleteCharAt(index);
+        return this;
+    }
+
+    public GoodStrBuilder deleteLastChar() {
+        sb.deleteCharAt(sb.length() - 1);
+        return this;
+    }
+
+    public GoodStrBuilder replaceCharAt(int idx, char rep) {
+        sb.deleteCharAt(idx);
+        sb.insert(idx, rep);
+        return this;
+    }
+
+    public GoodStrBuilder replaceLastChar(char rep) {
+        sb.deleteCharAt(sb.length() - 1);
+        sb.append(rep);
         return this;
     }
 

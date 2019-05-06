@@ -24,6 +24,7 @@ Thanks:
 - Update api, bot framework to newest version.
 - Move some files to make framework clean.
 - Remake the js command so that it can be used to change config of this bot.
+- _Experimental:_ ultimate command improvements with utilities written in java injected into the js engine.
 
 ### v0.4.8
 

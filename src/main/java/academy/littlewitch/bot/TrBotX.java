@@ -6,6 +6,7 @@ import academy.littlewitch.bot.commands.help.HelpCommand;
 import academy.littlewitch.bot.commands.jinyan.StartVoteJinyanCommand;
 import academy.littlewitch.bot.commands.math.MathCommand;
 import academy.littlewitch.bot.commands.supercommand.*;
+import academy.littlewitch.bot.commands.supercommand.objs.UtilObject;
 import academy.littlewitch.bot.commands.version.VersionCommand;
 import academy.littlewitch.bot.config.Configuration;
 import academy.littlewitch.bot.test.TestCommand;
@@ -23,7 +24,7 @@ import org.apache.commons.cli.*;
 import javax.script.ScriptEngine;
 
 public class TrBotX {
-    public static final String version = "v0.4.9.5";
+    public static final String version = "v0.4.9.19";
 
     private static PicqConfig botConfig;
 
@@ -46,6 +47,7 @@ public class TrBotX {
         preparation();
         Runtime.getRuntime().addShutdownHook(new Thread(TrBotX::onShutdown));
         start();
+        postpreparation();
     }
 
     public static PicqBotX getBot() {
@@ -156,11 +158,7 @@ public class TrBotX {
 
     private static void prepreparation() {
         PicqConstants.HTTP_API_VERSION_DETECTION = ".*";
-        NashornScriptEngineFactory factory = new NashornScriptEngineFactory();
-        jsEngine = factory.getScriptEngine();
-
-        jsEngine.put("config", Configuration.config);
-        jsEngine.put("bot", bot);
+        newEngine();
     }
 
     private static void preparation() {
@@ -215,6 +213,27 @@ public class TrBotX {
                 );
 
         bot.startBot();
+    }
+
+    private static void postpreparation() {
+        putEngineGlobalVariables();
+    }
+
+    private static void putEngineGlobalVariables() {
+        jsEngine.put("config", Configuration.config);
+        jsEngine.put("bot", bot);
+        jsEngine.put("global", new UtilObject());
+    }
+
+    private static void newEngine() {
+        NashornScriptEngineFactory factory = new NashornScriptEngineFactory();
+        jsEngine = factory.getScriptEngine();
+    }
+
+    public static void resetJsEngine() {
+        System.gc();
+        newEngine();
+        putEngineGlobalVariables();
     }
 
     private static void onShutdown() {
