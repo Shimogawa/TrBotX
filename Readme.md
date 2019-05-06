@@ -1,4 +1,4 @@
-# TrBotX 0.4.9
+# TrBotX 0.4.8
 
 [简体中文](Docs/Readme-cn.md)
 
@@ -24,6 +24,7 @@ Thanks:
 - Update api, bot framework to newest version.
 - Move some files to make framework clean.
 - Remake the js command so that it can be used to change config of this bot.
+- _Experimental:_ ultimate command improvements with utilities written in java injected into the js engine.
 
 ### v0.4.8
 
@@ -33,3 +34,4 @@ Thanks:
 - Added command to send announcement.
 - Added command to send private messages.
 - Commandline argument parser integrated.
+- Tickers implementation finished. (2019.05.05)
