@@ -24,7 +24,7 @@ import org.apache.commons.cli.*;
 import javax.script.ScriptEngine;
 
 public class TrBotX {
-    public static final String version = "v0.4.9.19";
+    public static final String version = "v0.4.9.20";
 
     private static PicqConfig botConfig;
 

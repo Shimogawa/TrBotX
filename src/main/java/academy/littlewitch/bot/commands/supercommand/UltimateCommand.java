@@ -17,6 +17,8 @@ public class UltimateCommand implements EverywhereCommand {
         if (!Configuration.config.superCommandConfig.ultimateCommand.enabled) {
             return null;
         }
+        if (!Configuration.config.superManagers.contains(user.getId()))
+            return null;
         if (arrayList.size() == 0)
             return null;
         String m = String.join(" ", arrayList);
