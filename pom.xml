@@ -6,7 +6,8 @@
 
     <groupId>com.github.shimogawa</groupId>
     <artifactId>TrBotX</artifactId>
-    <version>0.4.9.33</version>
+    <name>TrBotX</name>
+    <version>0.4.9.35</version>
 
     <properties>
         <maven.compiler.target>1.8</maven.compiler.target>
@@ -43,6 +44,14 @@
     </dependencies>
 
     <build>
+        <sourceDirectory>src/main/java</sourceDirectory>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

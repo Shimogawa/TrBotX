@@ -24,13 +24,18 @@ import jdk.nashorn.api.scripting.NashornScriptEngineFactory;
 import org.apache.commons.cli.*;
 
 import javax.script.ScriptEngine;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
 
 public class TrBotX {
-    public static final Version version = new Version(0, 4, 9, 33);
+    public static final Version version;
 
     public static final long god = 714026292L;
 
     public static long startTime = System.currentTimeMillis();
+
+    public static Properties properties;
 
     private static PicqConfig botConfig;
 
@@ -40,6 +45,19 @@ public class TrBotX {
 
     private static int botPort = 31092;
     private static int apiPort = 31091;
+
+    static {
+        try {
+            properties = new Properties();
+            InputStream is = TrBotX.class
+                    .getClassLoader().getResourceAsStream("trbotx.properties");
+            properties.load(is);
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.exit(0);
+        }
+        version = Version.parse(properties.getProperty("application.version"));
+    }
 
     public static void main(String[] args) {
         if (!parseArgs(args)) {
@@ -100,12 +118,12 @@ public class TrBotX {
         }
 
         if (cmd.hasOption('h')) {
-            System.out.println("TrBotX " + version);
+            System.out.println("TrBotX " + version.versionString());
             formatter.printHelp("TrBotX [options]", options);
             return false;
         }
         if (cmd.hasOption('v')) {
-            System.out.println("TrBotX " + version);
+            System.out.println("TrBotX " + version.versionString());
             return false;
         }
         if (cmd.hasOption('c')) {
