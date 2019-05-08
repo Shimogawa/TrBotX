@@ -29,7 +29,7 @@ public class Updater {
                     .getCodeSource()
                     .getLocation()
                     .toURI());
-            currentJar = t.getPath();
+            currentJar = t.getName();
         } catch (URISyntaxException e) {
             e.printStackTrace();
             System.exit(0);
@@ -66,9 +66,13 @@ public class Updater {
         String downloadUrl = jobj.get("browser_download_url").getAsString();
         long size = jobj.get("size").getAsLong();
         newJar = jobj.get("name").getAsString();
+        if (newJar.equals(currentJar)) {
+            System.err.println("Two files has the same name. Update aborted.");
+            return;
+        }
         try {
             saveUrl(newJar, downloadUrl, size);
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return;
         }
@@ -111,7 +115,7 @@ public class Updater {
                 total += count;
                 System.out.print("Downloaded: " +
                         String.format(
-                                "%10s / %10s",
+                                "%10s / %s",
                                 Util.humanReadableByteCount(total, false),
                                 Util.humanReadableByteCount(size, false))
                         + "\r");
