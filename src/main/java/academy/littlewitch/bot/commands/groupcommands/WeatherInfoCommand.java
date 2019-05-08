@@ -1,6 +1,8 @@
 package academy.littlewitch.bot.commands.groupcommands;
 
+import academy.littlewitch.bot.TrBotX;
 import academy.littlewitch.bot.config.Configuration;
+import academy.littlewitch.utils.Util;
 import academy.littlewitch.utils.net.HttpUtils;
 import academy.littlewitch.utils.net.httpobj.ResponseInfo;
 import cc.moecraft.icq.command.CommandProperties;
@@ -8,11 +10,12 @@ import cc.moecraft.icq.command.interfaces.GroupCommand;
 import cc.moecraft.icq.event.events.message.EventGroupMessage;
 import cc.moecraft.icq.user.Group;
 import cc.moecraft.icq.user.GroupUser;
+import cn.hutool.core.io.IoUtil;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
-import java.io.IOException;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -84,18 +87,20 @@ public class WeatherInfoCommand implements GroupCommand {
 
     private static boolean readCityInfo(EventGroupMessage event) {
         try {
-            String json = new String(
-                    Files.readAllBytes(Paths.get(CITY_FILE)), StandardCharsets.UTF_8);
+            InputStream is = TrBotX.class.getClassLoader().getResourceAsStream(CITY_FILE);
+            String json = Util.readAll(is);
+//            BufferedReader in = new BufferedReader(
+//                    new InputStreamReader(is, StandardCharsets.UTF_8));
+//            String json = new String(
+//                    Files.readAllBytes(Paths.get(CITY_FILE)), StandardCharsets.UTF_8);
             Gson gson = new Gson();
             CityInfo[] cityInfos = gson.fromJson(json, CityInfo[].class);
             cityChineseDict = new HashMap<>();
             for (int i = 0; i < cityInfos.length; i++) {
                 cityChineseDict.put(cityInfos[i].cityZh, cityInfos[i]);
             }
-        } catch (IOException e) {
-            for (long l : Configuration.config.superManagers) {
-                event.getHttpApi().sendPrivateMsg(l, e.getMessage());
-            }
+        } catch (Exception e) {
+            HttpUtils.sendToSupermanagers(event, e.getLocalizedMessage());
             cityChineseDict = null;
             return false;
         }

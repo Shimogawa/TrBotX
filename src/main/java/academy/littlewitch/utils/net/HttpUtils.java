@@ -1,8 +1,11 @@
 package academy.littlewitch.utils.net;
 
 import academy.littlewitch.bot.TrBotX;
+import academy.littlewitch.bot.config.Configuration;
 import academy.littlewitch.utils.net.httpobj.ResponseInfo;
 import academy.littlewitch.utils.KeyValuePair;
+import cc.moecraft.icq.event.events.message.EventMessage;
+import cc.moecraft.icq.sender.IcqHttpApi;
 import cc.moecraft.icq.sender.returndata.RawReturnData;
 import cc.moecraft.icq.utils.NetUtils;
 import cc.moecraft.utils.MapBuilder;
@@ -18,6 +21,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.*;
 import java.nio.charset.StandardCharsets;
+import java.util.Collection;
 import java.util.Map;
 import java.util.StringJoiner;
 
@@ -25,6 +29,32 @@ public class HttpUtils {
     private static final String USER_AGENT = "Mozilla/5.0";
 
     private HttpUtils() {}
+
+    public static void sendToAll(Collection<Long> id, String message) {
+        sendToAll(
+                TrBotX  .getBot()
+                        .getAccountManager()
+                        .getAccounts()
+                        .get(0)
+                        .getHttpApi(),
+                id,
+                message
+        );
+    }
+
+    public static void sendToAll(EventMessage em, Collection<Long> id, String message) {
+        sendToAll(em.getHttpApi(), id, message);
+    }
+
+    public static void sendToAll(IcqHttpApi api, Collection<Long> id, String message) {
+        for (long l : id) {
+            api.sendPrivateMsg(l, message);
+        }
+    }
+
+    public static void sendToSupermanagers(EventMessage em, String message) {
+        sendToAll(em.getHttpApi(), Configuration.config.superManagers, message);
+    }
 
     @Deprecated
     public static RawReturnData sendThroughApi(String api, Object... params) {

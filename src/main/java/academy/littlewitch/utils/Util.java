@@ -2,6 +2,11 @@ package academy.littlewitch.utils;
 
 import org.apache.commons.lang3.StringUtils;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -65,5 +70,32 @@ public class Util {
         long hour = (milli / (1000 * 60 * 60)) % 24;
 
         return String.format(format, hour, minute, second, millis);
+    }
+
+    /**
+     * Default UTF-8 charset.
+     * @param is
+     * @return
+     * @throws IOException
+     */
+    public static String readAll(InputStream is) throws IOException {
+        return readAll(is, StandardCharsets.UTF_8);
+    }
+
+    /**
+     * https://stackoverflow.com/questions/309424/how-do-i-read-convert-an-inputstream-into-a-string-in-java
+     * @param is
+     * @param cs
+     * @return
+     * @throws IOException
+     */
+    public static String readAll(InputStream is, Charset cs) throws IOException {
+        ByteArrayOutputStream result = new ByteArrayOutputStream();
+        byte[] buffer = new byte[1024];
+        int length;
+        while ((length = is.read(buffer)) != -1) {
+            result.write(buffer, 0, length);
+        }
+        return result.toString(cs.name());
     }
 }
