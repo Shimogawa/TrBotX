@@ -136,6 +136,8 @@ public class HttpUtils {
                 sb.append(line);
             }
             return new ResponseInfo(responseCode, sb.toString());
+        } catch (Exception e) {
+            return new ResponseInfo(responseCode, null);
         }
     }
 }

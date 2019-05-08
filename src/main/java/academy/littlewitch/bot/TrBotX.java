@@ -14,6 +14,7 @@ import academy.littlewitch.bot.test.TestCommand;
 import academy.littlewitch.bot.test.TestListener;
 import academy.littlewitch.bot.listeners.qungui.RepeatControlListener;
 import academy.littlewitch.bot.listeners.qungui.ShuapinControlListener;
+import academy.littlewitch.utils.Updater;
 import academy.littlewitch.utils.Version;
 import cc.moecraft.icq.PicqBotX;
 import cc.moecraft.icq.PicqConfig;
@@ -96,7 +97,10 @@ public class TrBotX {
         o = new Option("g", false, "Generates the config file (won't generate if exists)");
         options.addOption(o);
 
-        o = new Option("u", false, "Update the config file");
+        o = new Option("a",false, "Update the config file");
+        options.addOption(o);
+
+        o = new Option("u", false, "Update the jar (program)");
         options.addOption(o);
 
         o = new Option(null, "port-bot", true, "Bot's port (default 31092)");
@@ -141,7 +145,7 @@ public class TrBotX {
                     "Config file created." : "Config file already exist.");
             return false;
         }
-        if (cmd.hasOption('u')) {
+        if (cmd.hasOption('a')) {
             try {
                 Configuration.getConfig();
             } catch (JsonSyntaxException e) {
@@ -149,6 +153,10 @@ public class TrBotX {
                 return false;
             }
             Configuration.saveConfig();
+            return false;
+        }
+        if (cmd.hasOption('u')) {
+            Updater.update();
             return false;
         }
         if (cmd.hasOption("port-bot")) {

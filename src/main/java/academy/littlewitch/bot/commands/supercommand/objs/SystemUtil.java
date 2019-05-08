@@ -4,8 +4,9 @@ import java.io.PrintStream;
 
 public class SystemUtil {
 
-    public void exit(int status) {
+    public boolean exit(int status) {
         System.exit(status);
+        return true;
     }
 
     public long currentTimeMillis() {

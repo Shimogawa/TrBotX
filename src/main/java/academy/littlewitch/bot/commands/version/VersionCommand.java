@@ -23,21 +23,23 @@ public class VersionCommand implements EverywhereCommand {
     @Override
     public String run(EventMessage eventMessage, User user, String s, ArrayList<String> arrayList) {
         new Thread(() -> {
-            ResponseInfo ri = HttpUtils.sendGetHttp("https://api.github.com/repos/Shimogawa/TrBotX/releases/");
+            ResponseInfo ri = HttpUtils.sendGetHttp("https://api.github.com/repos/Shimogawa/TrBotX/releases");
             String respTxt = ri.getResponseText();
             if (StringUtils.isEmpty(respTxt)) {
                 eventMessage.respond(getBotVersion());
                 return;
             }
+            String postfix = "";
             JsonArray jarr = jsonParser.parse(ri.getResponseText()).getAsJsonArray();
             JsonObject jobj = jarr.get(0).getAsJsonObject();
             Version v = Version.parse(jobj.get("tag_name").getAsString());
-            String postfix = "";
             if (v.compareTo(TrBotX.version) == 0) {
                 postfix = "（最新版）";
             } else if (v.compareTo(TrBotX.version) > 0) {
                 postfix = "\n（更新可用：" + v.versionString() + "）";
                 postfix += "\nhttps://github.com/Shimogawa/TrBotX";
+            } else {
+                postfix = "（先行版）";
             }
             eventMessage.respond(getBotVersion() + postfix);
         }).start();

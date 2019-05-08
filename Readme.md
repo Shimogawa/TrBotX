@@ -19,7 +19,11 @@ Thanks:
 
 ## Version History
 
-### v0.4.9 (Latest)
+### v0.4.10 (Latest)
+
+- Updater integrated. Check and download from github release.
+
+### v0.4.9
 
 - Update api, bot framework to newest version.
 - Move some files to make framework clean.
