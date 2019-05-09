@@ -10,6 +10,7 @@ import academy.littlewitch.bot.commands.supercommand.objs.UtilObject;
 import academy.littlewitch.bot.commands.version.VersionCommand;
 import academy.littlewitch.bot.config.Configuration;
 import academy.littlewitch.bot.listeners.LCommandListener;
+import academy.littlewitch.bot.listeners.timers.InaccurateTicker;
 import academy.littlewitch.bot.test.TestCommand;
 import academy.littlewitch.bot.test.TestListener;
 import academy.littlewitch.bot.listeners.qungui.RepeatControlListener;
@@ -18,7 +19,6 @@ import academy.littlewitch.utils.Updater;
 import academy.littlewitch.utils.Version;
 import cc.moecraft.icq.PicqBotX;
 import cc.moecraft.icq.PicqConfig;
-import cc.moecraft.icq.PicqConstants;
 import cc.moecraft.logger.environments.ColorSupportLevel;
 import com.google.gson.JsonSyntaxException;
 import jdk.nashorn.api.scripting.NashornScriptEngineFactory;
@@ -47,6 +47,8 @@ public class TrBotX {
     private static int botPort = 31092;
     private static int apiPort = 31091;
 
+    private static InaccurateTicker backupTicker;
+
     static {
         try {
             properties = new Properties();
@@ -68,8 +70,8 @@ public class TrBotX {
         if (!readConfiguration()) {
             return;
         }
-        prepreparation();
-        preparation();
+        generalPreparation();
+        botPreparation();
         Runtime.getRuntime().addShutdownHook(new Thread(TrBotX::onShutdown));
         start();
         postpreparation();
@@ -188,12 +190,19 @@ public class TrBotX {
         return true;
     }
 
-    private static void prepreparation() {
-        PicqConstants.HTTP_API_VERSION_DETECTION = ".*";
+    private static void generalPreparation() {
         newEngine();
+
+        // Backup thread
+        backupTicker = new InaccurateTicker(
+                Configuration.config.backupInterval * 1000L,
+                TrBotX::onBackup,
+                true
+        );
+        new Thread(backupTicker).start();
     }
 
-    private static void preparation() {
+    private static void botPreparation() {
         botConfig = new PicqConfig(botPort);
         botConfig.setMultiAccountOptimizations(false);
         botConfig.setApiAsync(true);
@@ -270,6 +279,11 @@ public class TrBotX {
     }
 
     private static void onShutdown() {
+        backupTicker.stop();
+        Configuration.saveConfig();
+    }
+
+    private static void onBackup() {
         Configuration.saveConfig();
     }
 }

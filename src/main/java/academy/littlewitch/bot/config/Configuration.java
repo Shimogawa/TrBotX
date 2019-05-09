@@ -49,6 +49,9 @@ public class Configuration {
     @SerializedName("超级指令设定")
     public SuperCommandConfig superCommandConfig = new SuperCommandConfig();
 
+    @SerializedName("备份间隔")
+    public long backupInterval = 43200;
+
     public boolean debugMode = false;
 
     private Configuration() {}

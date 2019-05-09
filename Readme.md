@@ -1,4 +1,4 @@
-# TrBotX 0.4.9
+# TrBotX 0.4.10
 
 [简体中文](Docs/Readme-cn.md)
 
@@ -22,6 +22,7 @@ Thanks:
 ### v0.4.10 (Latest)
 
 - Updater integrated. Check and download from github release.
+- The program now can backup every given interval.
 
 ### v0.4.9
 
