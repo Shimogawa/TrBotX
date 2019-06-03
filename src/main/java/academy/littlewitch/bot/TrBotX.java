@@ -19,6 +19,7 @@ import academy.littlewitch.utils.Updater;
 import academy.littlewitch.utils.Version;
 import cc.moecraft.icq.PicqBotX;
 import cc.moecraft.icq.PicqConfig;
+import cc.moecraft.icq.PicqConstants;
 import cc.moecraft.logger.environments.ColorSupportLevel;
 import com.google.gson.JsonSyntaxException;
 import jdk.nashorn.api.scripting.NashornScriptEngineFactory;
@@ -209,6 +210,7 @@ public class TrBotX {
         botConfig.setCommandArgsSplitRegex("\\s");
         botConfig.setColorSupportLevel(ColorSupportLevel.OS_DEPENDENT);
         botConfig.setNoVerify(true);
+        PicqConstants.HTTP_API_VERSION_DETECTION = ".*";
     }
 
     private static void start() {

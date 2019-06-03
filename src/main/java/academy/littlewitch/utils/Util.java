@@ -1,5 +1,6 @@
 package academy.littlewitch.utils;
 
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.ByteArrayOutputStream;
@@ -20,6 +21,12 @@ public class Util {
                 .replace("[", "&#91;")
                 .replace("]", "&#93;")
                 .replace(",", "&#44;");
+    }
+
+    public static String unescapeCQString(String s) {
+        return s.replace("&amp;", "&")
+                .replace("&#91;", "[")
+                .replace("&#93;", "]");
     }
 
     public static ArrayList<String> splitAllWhitespace(ArrayList<String> args) {

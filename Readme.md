@@ -23,6 +23,7 @@ Thanks:
 
 - Updater integrated. Check and download from github release.
 - The program now can backup every given interval.
+- Fixed announcement parsing problems.
 
 ### v0.4.9
 

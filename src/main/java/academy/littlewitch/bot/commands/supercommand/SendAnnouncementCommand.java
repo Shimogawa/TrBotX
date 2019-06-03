@@ -1,6 +1,7 @@
 package academy.littlewitch.bot.commands.supercommand;
 
 import academy.littlewitch.bot.config.Configuration;
+import academy.littlewitch.utils.Util;
 import academy.littlewitch.utils.net.HttpUtils;
 import cc.moecraft.icq.command.CommandProperties;
 import cc.moecraft.icq.command.interfaces.PrivateCommand;
@@ -28,7 +29,8 @@ public class SendAnnouncementCommand implements PrivateCommand {
         for (long id : Configuration.config.trGroups) {
 //            HttpUtils.sendThroughApi("_send_group_notice", "group_id", id,
 //                    "title", all[1], "content", all[2]);
-            eventPrivateMessage.getHttpApi().sendGroupNotice(id, all[1], all[2]);
+            eventPrivateMessage.getHttpApi().sendGroupNotice(
+                    id, Util.unescapeCQString(all[1]), Util.unescapeCQString(all[2]));
         }
         return "发送成功";
     }
